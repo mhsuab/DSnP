@@ -1,0 +1,21 @@
+Please enter the file name: File "test1.json" was read in successfully.
+Enter command: {
+  "Ric" : 100,
+  "John" : 50
+}
+Enter command: The summation of the values is: 150.
+Enter command: The average of the values is: 75.0.
+Enter command: The maximum element is: { "Ric" : 100 }.
+Enter command: The minimum element is: { "John" : 50 }.
+Enter command: Enter command: {
+  "Ric" : 100,
+  "John" : 50,
+  "asdf" : 345
+}
+Enter command: The maximum element is: { "asdf" : 345 }.
+Enter command: The minimum element is: { "John" : 50 }.
+Enter command: Enter command: The summation of the values is: 1481.
+Enter command: The average of the values is: 370.2.
+Enter command: The maximum element is: { "eiurwi" : 986 }.
+Enter command: The minimum element is: { "John" : 50 }.
+Enter command: 

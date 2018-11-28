@@ -1,0 +1,45 @@
+adt> adta -r 20
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = brzscs   [  1] = dxwmbe   [  2] = elkwgy   [  3] = gpcbgx   
+[  4] = hvvrrb   [  5] = ibqbzm   [  6] = isruoa   [  7] = jqsvhi   
+[  8] = jwjehw   [  9] = nvhizi   [ 10] = nzueat   [ 11] = oolqqs   
+[ 12] = poklhg   [ 13] = pwubvx   [ 14] = pyhoqj   [ 15] = rqqlsm   
+[ 16] = wjvtwx   [ 17] = xfnpav   [ 18] = yoqgwq   [ 19] = zemvji   
+
+
+adt> adtd -front 3
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = gpcbgx   [  1] = hvvrrb   [  2] = ibqbzm   [  3] = isruoa   
+[  4] = jqsvhi   [  5] = jwjehw   [  6] = nvhizi   [  7] = nzueat   
+[  8] = oolqqs   [  9] = poklhg   [ 10] = pwubvx   [ 11] = pyhoqj   
+[ 12] = rqqlsm   [ 13] = wjvtwx   [ 14] = xfnpav   [ 15] = yoqgwq   
+[ 16] = zemvji   
+
+adt> adtd -back 5
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = gpcbgx   [  1] = hvvrrb   [  2] = ibqbzm   [  3] = isruoa   
+[  4] = jqsvhi   [  5] = jwjehw   [  6] = nvhizi   [  7] = nzueat   
+[  8] = oolqqs   [  9] = poklhg   [ 10] = pwubvx   [ 11] = pyhoqj   
+
+
+adt> adtd -rand 4
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = gpcbgx   [  1] = ibqbzm   [  2] = isruoa   [  3] = jwjehw   
+[  4] = nzueat   [  5] = oolqqs   [  6] = poklhg   [  7] = pyhoqj   
+
+
+adt> usage -all
+Period time used : 0 seconds
+Total time used  : 0 seconds
+Total memory used: 0.1797 M Bytes
+
+adt> q -f
+

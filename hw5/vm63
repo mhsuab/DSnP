@@ -1,0 +1,104 @@
+adt> adta -s jordan
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = jordan   
+
+adt> adta -s jordano
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = jordan   [  1] = jordan   
+
+adt> adta -s jorda
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = jorda   [  1] = jordan   [  2] = jordan   
+
+adt> adta -s jordan
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = jorda   [  1] = jordan   [  2] = jordan   [  3] = jordan   
+
+
+adt> adta -s jordana
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = jorda   [  1] = jordan   [  2] = jordan   [  3] = jordan   
+[  4] = jordan   
+
+adt> adtd -s jordani
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = jorda   [  1] = jordan   [  2] = jordan   [  3] = jordan   
+
+
+adt> adtd -s jord
+Error: "jord" is not found!
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = jorda   [  1] = jordan   [  2] = jordan   [  3] = jordan   
+
+
+adt> adta -r 30
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = bdoras   [  1] = brzscs   [  2] = dxwmbe   [  3] = ecoglo   
+[  4] = elkwgy   [  5] = enaqkv   [  6] = fjdcqh   [  7] = gpcbgx   
+[  8] = hvvrrb   [  9] = ibqbzm   [ 10] = isruoa   [ 11] = jemxun   
+[ 12] = jorda   [ 13] = jordan   [ 14] = jordan   [ 15] = jordan   
+[ 16] = jqsvhi   [ 17] = jwjehw   [ 18] = mspxew   [ 19] = nvhizi   
+[ 20] = nzueat   [ 21] = oolqqs   [ 22] = poklhg   [ 23] = pwubvx   
+[ 24] = pyhoqj   [ 25] = qgtarv   [ 26] = qljlcb   [ 27] = rqqlsm   
+[ 28] = stcizy   [ 29] = wjvtwx   [ 30] = xfnpav   [ 31] = yoqgwq   
+[ 32] = ypxgeo   [ 33] = zemvji   
+
+adt> adtd -front 5
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = enaqkv   [  1] = fjdcqh   [  2] = gpcbgx   [  3] = hvvrrb   
+[  4] = ibqbzm   [  5] = isruoa   [  6] = jemxun   [  7] = jorda   
+[  8] = jordan   [  9] = jordan   [ 10] = jordan   [ 11] = jqsvhi   
+[ 12] = jwjehw   [ 13] = mspxew   [ 14] = nvhizi   [ 15] = nzueat   
+[ 16] = oolqqs   [ 17] = poklhg   [ 18] = pwubvx   [ 19] = pyhoqj   
+[ 20] = qgtarv   [ 21] = qljlcb   [ 22] = rqqlsm   [ 23] = stcizy   
+[ 24] = wjvtwx   [ 25] = xfnpav   [ 26] = yoqgwq   [ 27] = ypxgeo   
+[ 28] = zemvji   
+
+adt> adtd -back 5
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = enaqkv   [  1] = fjdcqh   [  2] = gpcbgx   [  3] = hvvrrb   
+[  4] = ibqbzm   [  5] = isruoa   [  6] = jemxun   [  7] = jorda   
+[  8] = jordan   [  9] = jordan   [ 10] = jordan   [ 11] = jqsvhi   
+[ 12] = jwjehw   [ 13] = mspxew   [ 14] = nvhizi   [ 15] = nzueat   
+[ 16] = oolqqs   [ 17] = poklhg   [ 18] = pwubvx   [ 19] = pyhoqj   
+[ 20] = qgtarv   [ 21] = qljlcb   [ 22] = rqqlsm   [ 23] = stcizy   
+
+
+adt> adtd -r 5
+
+adt> adtp
+=== ADT (bst) ===
+[  0] = enaqkv   [  1] = fjdcqh   [  2] = gpcbgx   [  3] = hvvrrb   
+[  4] = jemxun   [  5] = jorda   [  6] = jordan   [  7] = jordan   
+[  8] = jordan   [  9] = jqsvhi   [ 10] = mspxew   [ 11] = nvhizi   
+[ 12] = oolqqs   [ 13] = poklhg   [ 14] = pwubvx   [ 15] = pyhoqj   
+[ 16] = qljlcb   [ 17] = rqqlsm   [ 18] = stcizy   
+
+adt> adtd -all
+
+adt> adtp
+=== ADT (bst) ===
+
+
+adt> q -f
+

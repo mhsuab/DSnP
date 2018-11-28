@@ -1,0 +1,16 @@
+test1.json
+PRINT
+SUM
+AVE
+MAX
+MIN
+ADD asdf 345
+PRINT
+MAX
+MIN
+ADD eiurwi 986
+SUM
+AVE
+MAX
+MIN
+EXIT

@@ -1,0 +1,38 @@
+mtdelete a
+mtdelete -i -3
+mtdelete -r -3
+mtdelete -a 3
+mtdelete -r -a 3
+mtdelete -i a
+mtdelete -r a -i
+mtdelete 100
+mtdelete -a -r 3
+mtdelete -r 3 -i
+mtdelete -i 8 -a f
+mtdelete -a -i -i
+mtdelete -a -i -r
+mtdelete -a -r
+mtdelete -a -r -i
+mtdelete -a -r -r
+mtdelete -i 3 -a
+mtdelete -i 1 a e
+mtdelete -e e
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+mtdelete
+q -f

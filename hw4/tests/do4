@@ -1,0 +1,140 @@
+mtr 0
+mtr 39
+mtr 40
+mtn 1
+mtn 1 -a 1
+mtn 1 -a 0
+mtp
+MTD
+mtd -a
+mtd -r 4
+help mtn
+mtn 5
+mtr 500
+mtn 5
+mtd -a -Ran 3
+mtd -r -3
+mtd -r 3
+mtp
+mtn 123
+mtp
+mtd -r -r 23
+mtd -r 23 -r
+mtd -r 23
+mtp
+mtd -r 23 -i 5 -a
+mtn 123 -a 999
+mtn 123 -a 0
+mtn 123 -a 10
+mtd -ARR -i 54
+mtp
+mtd -a -r 100
+mtp
+mtn 60 -a 11
+mtn 60 -a 10
+mtr
+mtn 123 -a 10
+mtd -ARR -i 54
+mtd -a -r 100
+mtp
+mtn 60 -a 10
+mtn 60 -a 10 -i 3
+mtn -a 10 60
+mtp
+mtr 1234
+mtr -123
+mtr 100000
+mtn 60 -a 10
+mtp
+mtn 30 -a 5130
+mtp
+mtn 80 -a 2058
+mtp
+mtn -r 20 -a
+mtp
+mtn -r 50 -a
+mtp
+mtn 60 -a 10
+mtp
+mtn 30 -a 4878
+mtp
+mtn 80 -a 2058
+mtp
+mtn 1 -a 266
+mtp
+mtn 60 -a 11
+mtp
+mtn 30 -a 4879
+mtp
+mtn 80 -a 2059
+mtp
+mtn 10 -a 10
+mtp
+mtn 32 -a 266
+mtp
+mtn 54 -a 522
+mtp
+mtn 76 -a 778
+mtp
+mtn 98 -a 1034
+mtp
+mtn 200 -a 3476
+mtp
+mtd -r 3000 -a
+mtp
+mtn 218 -a 2324
+mtp
+mtn 170 -a 404
+mtp
+mtn 64 -a 532
+mtp
+mtn 192 -a 660
+mtp
+mtn 2 -a 1172
+mtp
+mtn 130 -a 1300
+mtp
+mtn 24 -a 1428
+mtp
+mtd -r 300 -a
+mtp
+mtn 86 -a 788
+mtp
+mtn 214 -a 916
+mtp
+mtn 108 -a 1044
+mtp
+mtn -r 1000
+mtp
+mtn -r 1000 -a
+mtp
+mtn 623 -a 256
+mtp
+mtn 623 -a 1024
+mtp
+mtn 24 -a 1428
+mtp
+mtn 30 -a 3 
+mtp
+mtn 30 -a 3
+mtp
+mtn 123
+mtp
+mtd 55 -r
+mtp
+mtn 20000
+mtp
+mtd -i 0
+mtp
+mtd -i 20000
+mtp
+mtd -i 0
+mtp
+mtd -a -r 1234
+mtp
+mtd -r 12345
+mtp
+mtn 1234
+mtp
+Usage -all
+q -f

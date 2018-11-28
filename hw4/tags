@@ -1,0 +1,436 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ARROW_DOWN_KEY	include/cmdCharDef.h	/^   ARROW_DOWN_KEY   = 66 + ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_DOWN_KEY	include/cmdCharDef.h	/^   ARROW_DOWN_KEY   = TA_ARROW_DOWN_KEY,$/;"	e	enum:ParseChar
+ARROW_DOWN_KEY	src/cmd/cmdCharDef.h	/^   ARROW_DOWN_KEY   = 66 + ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_DOWN_KEY	src/cmd/cmdCharDef.h	/^   ARROW_DOWN_KEY   = TA_ARROW_DOWN_KEY,$/;"	e	enum:ParseChar
+ARROW_KEY_BEGIN	include/cmdCharDef.h	/^   ARROW_KEY_BEGIN  = ARROW_UP_KEY,$/;"	e	enum:ParseChar
+ARROW_KEY_BEGIN	include/cmdCharDef.h	/^   ARROW_KEY_BEGIN  = TA_ARROW_KEY_BEGIN,$/;"	e	enum:ParseChar
+ARROW_KEY_BEGIN	src/cmd/cmdCharDef.h	/^   ARROW_KEY_BEGIN  = ARROW_UP_KEY,$/;"	e	enum:ParseChar
+ARROW_KEY_BEGIN	src/cmd/cmdCharDef.h	/^   ARROW_KEY_BEGIN  = TA_ARROW_KEY_BEGIN,$/;"	e	enum:ParseChar
+ARROW_KEY_END	include/cmdCharDef.h	/^   ARROW_KEY_END    = ARROW_LEFT_KEY,$/;"	e	enum:ParseChar
+ARROW_KEY_END	include/cmdCharDef.h	/^   ARROW_KEY_END    = TA_ARROW_KEY_END,$/;"	e	enum:ParseChar
+ARROW_KEY_END	src/cmd/cmdCharDef.h	/^   ARROW_KEY_END    = ARROW_LEFT_KEY,$/;"	e	enum:ParseChar
+ARROW_KEY_END	src/cmd/cmdCharDef.h	/^   ARROW_KEY_END    = TA_ARROW_KEY_END,$/;"	e	enum:ParseChar
+ARROW_KEY_FLAG	include/cmdCharDef.h	/^   ARROW_KEY_FLAG   = 1 << 8,$/;"	e	enum:ParseChar
+ARROW_KEY_FLAG	include/cmdCharDef.h	/^   ARROW_KEY_FLAG   = TA_ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_KEY_FLAG	src/cmd/cmdCharDef.h	/^   ARROW_KEY_FLAG   = 1 << 8,$/;"	e	enum:ParseChar
+ARROW_KEY_FLAG	src/cmd/cmdCharDef.h	/^   ARROW_KEY_FLAG   = TA_ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_KEY_INT	include/cmdCharDef.h	/^   ARROW_KEY_INT    = 91,$/;"	e	enum:ParseChar
+ARROW_KEY_INT	include/cmdCharDef.h	/^   ARROW_KEY_INT    = TA_ARROW_KEY_INT,$/;"	e	enum:ParseChar
+ARROW_KEY_INT	src/cmd/cmdCharDef.h	/^   ARROW_KEY_INT    = 91,$/;"	e	enum:ParseChar
+ARROW_KEY_INT	src/cmd/cmdCharDef.h	/^   ARROW_KEY_INT    = TA_ARROW_KEY_INT,$/;"	e	enum:ParseChar
+ARROW_LEFT_KEY	include/cmdCharDef.h	/^   ARROW_LEFT_KEY   = 68 + ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_LEFT_KEY	include/cmdCharDef.h	/^   ARROW_LEFT_KEY   = TA_ARROW_LEFT_KEY,$/;"	e	enum:ParseChar
+ARROW_LEFT_KEY	src/cmd/cmdCharDef.h	/^   ARROW_LEFT_KEY   = 68 + ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_LEFT_KEY	src/cmd/cmdCharDef.h	/^   ARROW_LEFT_KEY   = TA_ARROW_LEFT_KEY,$/;"	e	enum:ParseChar
+ARROW_RIGHT_KEY	include/cmdCharDef.h	/^   ARROW_RIGHT_KEY  = 67 + ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_RIGHT_KEY	include/cmdCharDef.h	/^   ARROW_RIGHT_KEY  = TA_ARROW_RIGHT_KEY,$/;"	e	enum:ParseChar
+ARROW_RIGHT_KEY	src/cmd/cmdCharDef.h	/^   ARROW_RIGHT_KEY  = 67 + ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_RIGHT_KEY	src/cmd/cmdCharDef.h	/^   ARROW_RIGHT_KEY  = TA_ARROW_RIGHT_KEY,$/;"	e	enum:ParseChar
+ARROW_UP_KEY	include/cmdCharDef.h	/^   ARROW_UP_KEY     = 65 + ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_UP_KEY	include/cmdCharDef.h	/^   ARROW_UP_KEY     = TA_ARROW_UP_KEY,$/;"	e	enum:ParseChar
+ARROW_UP_KEY	src/cmd/cmdCharDef.h	/^   ARROW_UP_KEY     = 65 + ARROW_KEY_FLAG,$/;"	e	enum:ParseChar
+ARROW_UP_KEY	src/cmd/cmdCharDef.h	/^   ARROW_UP_KEY     = TA_ARROW_UP_KEY,$/;"	e	enum:ParseChar
+BACK_SPACE_CHAR	include/cmdCharDef.h	/^   BACK_SPACE_CHAR  = 8,$/;"	e	enum:ParseChar
+BACK_SPACE_CHAR	include/cmdCharDef.h	/^   BACK_SPACE_CHAR  = TA_BACK_SPACE_CHAR,$/;"	e	enum:ParseChar
+BACK_SPACE_CHAR	src/cmd/cmdCharDef.h	/^   BACK_SPACE_CHAR  = 8,$/;"	e	enum:ParseChar
+BACK_SPACE_CHAR	src/cmd/cmdCharDef.h	/^   BACK_SPACE_CHAR  = TA_BACK_SPACE_CHAR,$/;"	e	enum:ParseChar
+BACK_SPACE_KEY	include/cmdCharDef.h	/^   BACK_SPACE_KEY   = 127,$/;"	e	enum:ParseChar
+BACK_SPACE_KEY	include/cmdCharDef.h	/^   BACK_SPACE_KEY   = TA_BACK_SPACE_KEY,$/;"	e	enum:ParseChar
+BACK_SPACE_KEY	src/cmd/cmdCharDef.h	/^   BACK_SPACE_KEY   = 127,$/;"	e	enum:ParseChar
+BACK_SPACE_KEY	src/cmd/cmdCharDef.h	/^   BACK_SPACE_KEY   = TA_BACK_SPACE_KEY,$/;"	e	enum:ParseChar
+BEEP_CHAR	include/cmdCharDef.h	/^   BEEP_CHAR        = 7,$/;"	e	enum:ParseChar
+BEEP_CHAR	include/cmdCharDef.h	/^   BEEP_CHAR        = TA_BEEP_CHAR,$/;"	e	enum:ParseChar
+BEEP_CHAR	src/cmd/cmdCharDef.h	/^   BEEP_CHAR        = 7,$/;"	e	enum:ParseChar
+BEEP_CHAR	src/cmd/cmdCharDef.h	/^   BEEP_CHAR        = TA_BEEP_CHAR,$/;"	e	enum:ParseChar
+CMD_CHAR_DEF_H	include/cmdCharDef.h	/^#define CMD_CHAR_DEF_H$/;"	d
+CMD_CHAR_DEF_H	src/cmd/cmdCharDef.h	/^#define CMD_CHAR_DEF_H$/;"	d
+CMD_EXEC_DONE	include/cmdParser.h	/^   CMD_EXEC_DONE  = 0,$/;"	e	enum:CmdExecStatus
+CMD_EXEC_DONE	src/cmd/cmdParser.h	/^   CMD_EXEC_DONE  = 0,$/;"	e	enum:CmdExecStatus
+CMD_EXEC_ERROR	include/cmdParser.h	/^   CMD_EXEC_ERROR = 1,$/;"	e	enum:CmdExecStatus
+CMD_EXEC_ERROR	src/cmd/cmdParser.h	/^   CMD_EXEC_ERROR = 1,$/;"	e	enum:CmdExecStatus
+CMD_EXEC_NOP	include/cmdParser.h	/^   CMD_EXEC_NOP   = 3,$/;"	e	enum:CmdExecStatus
+CMD_EXEC_NOP	src/cmd/cmdParser.h	/^   CMD_EXEC_NOP   = 3,$/;"	e	enum:CmdExecStatus
+CMD_EXEC_QUIT	include/cmdParser.h	/^   CMD_EXEC_QUIT  = 2,$/;"	e	enum:CmdExecStatus
+CMD_EXEC_QUIT	src/cmd/cmdParser.h	/^   CMD_EXEC_QUIT  = 2,$/;"	e	enum:CmdExecStatus
+CMD_EXEC_TOT	include/cmdParser.h	/^   CMD_EXEC_TOT$/;"	e	enum:CmdExecStatus
+CMD_EXEC_TOT	src/cmd/cmdParser.h	/^   CMD_EXEC_TOT$/;"	e	enum:CmdExecStatus
+CMD_OPT_ERROR_TOT	include/cmdParser.h	/^   CMD_OPT_ERROR_TOT$/;"	e	enum:CmdOptionError
+CMD_OPT_ERROR_TOT	src/cmd/cmdParser.h	/^   CMD_OPT_ERROR_TOT$/;"	e	enum:CmdOptionError
+CMD_OPT_EXTRA	include/cmdParser.h	/^   CMD_OPT_EXTRA      = 1,$/;"	e	enum:CmdOptionError
+CMD_OPT_EXTRA	src/cmd/cmdParser.h	/^   CMD_OPT_EXTRA      = 1,$/;"	e	enum:CmdOptionError
+CMD_OPT_FOPEN_FAIL	include/cmdParser.h	/^   CMD_OPT_FOPEN_FAIL = 3,$/;"	e	enum:CmdOptionError
+CMD_OPT_FOPEN_FAIL	src/cmd/cmdParser.h	/^   CMD_OPT_FOPEN_FAIL = 3,$/;"	e	enum:CmdOptionError
+CMD_OPT_ILLEGAL	include/cmdParser.h	/^   CMD_OPT_ILLEGAL    = 2,$/;"	e	enum:CmdOptionError
+CMD_OPT_ILLEGAL	src/cmd/cmdParser.h	/^   CMD_OPT_ILLEGAL    = 2,$/;"	e	enum:CmdOptionError
+CMD_OPT_MISSING	include/cmdParser.h	/^   CMD_OPT_MISSING    = 0,$/;"	e	enum:CmdOptionError
+CMD_OPT_MISSING	src/cmd/cmdParser.h	/^   CMD_OPT_MISSING    = 0,$/;"	e	enum:CmdOptionError
+CMD_PARSER_H	include/cmdParser.h	/^#define CMD_PARSER_H$/;"	d
+CMD_PARSER_H	src/cmd/cmdParser.h	/^#define CMD_PARSER_H$/;"	d
+CmdClass	include/cmdParser.h	/^#define CmdClass(/;"	d
+CmdClass	src/cmd/cmdParser.h	/^#define CmdClass(/;"	d
+CmdExec	include/cmdParser.h	/^   CmdExec() {}$/;"	f	class:CmdExec
+CmdExec	include/cmdParser.h	/^class CmdExec$/;"	c
+CmdExec	src/cmd/cmdParser.h	/^   CmdExec() {}$/;"	f	class:CmdExec
+CmdExec	src/cmd/cmdParser.h	/^class CmdExec$/;"	c
+CmdExecStatus	include/cmdParser.h	/^enum CmdExecStatus$/;"	g
+CmdExecStatus	src/cmd/cmdParser.h	/^enum CmdExecStatus$/;"	g
+CmdMap	include/cmdParser.h	/^typedef map<const string, CmdExec*>   CmdMap;$/;"	t	class:CmdParser
+CmdMap	src/cmd/cmdParser.h	/^typedef map<const string, CmdExec*>   CmdMap;$/;"	t	class:CmdParser
+CmdOptionError	include/cmdParser.h	/^enum CmdOptionError$/;"	g
+CmdOptionError	src/cmd/cmdParser.h	/^enum CmdOptionError$/;"	g
+CmdParser	include/cmdParser.h	/^   CmdParser(const string& p) : _prompt(p), _dofile(0),$/;"	f	class:CmdParser
+CmdParser	include/cmdParser.h	/^class CmdParser$/;"	c
+CmdParser	src/cmd/cmdParser.h	/^   CmdParser(const string& p) : _prompt(p), _dofile(0),$/;"	f	class:CmdParser
+CmdParser	src/cmd/cmdParser.h	/^class CmdParser$/;"	c
+CmdRegPair	include/cmdParser.h	/^typedef pair<const string, CmdExec*>  CmdRegPair;$/;"	t	class:CmdParser
+CmdRegPair	src/cmd/cmdParser.h	/^typedef pair<const string, CmdExec*>  CmdRegPair;$/;"	t	class:CmdParser
+DEBUG_FLAG	Makefile	/^all:  DEBUG_FLAG =$/;"	m
+DEBUG_FLAG	Makefile	/^debug:DEBUG_FLAG = -DMEM_DEBUG$/;"	m
+DELETE_KEY	include/cmdCharDef.h	/^   DELETE_KEY       = 51 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+DELETE_KEY	include/cmdCharDef.h	/^   DELETE_KEY       = TA_DELETE_KEY,$/;"	e	enum:ParseChar
+DELETE_KEY	src/cmd/cmdCharDef.h	/^   DELETE_KEY       = 51 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+DELETE_KEY	src/cmd/cmdCharDef.h	/^   DELETE_KEY       = TA_DELETE_KEY,$/;"	e	enum:ParseChar
+END_KEY	include/cmdCharDef.h	/^   END_KEY          = 52 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+END_KEY	include/cmdCharDef.h	/^   END_KEY          = TA_END_KEY,$/;"	e	enum:ParseChar
+END_KEY	src/cmd/cmdCharDef.h	/^   END_KEY          = 52 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+END_KEY	src/cmd/cmdCharDef.h	/^   END_KEY          = TA_END_KEY,$/;"	e	enum:ParseChar
+ESC_KEY	include/cmdCharDef.h	/^   ESC_KEY          = 27,         \/\/ Not printable; used for combo keys$/;"	e	enum:ParseChar
+ESC_KEY	include/cmdCharDef.h	/^   ESC_KEY          = TA_ESC_KEY,         \/\/ Not printable; used for combo keys$/;"	e	enum:ParseChar
+ESC_KEY	src/cmd/cmdCharDef.h	/^   ESC_KEY          = 27,         \/\/ Not printable; used for combo keys$/;"	e	enum:ParseChar
+ESC_KEY	src/cmd/cmdCharDef.h	/^   ESC_KEY          = TA_ESC_KEY,         \/\/ Not printable; used for combo keys$/;"	e	enum:ParseChar
+EXEC	Makefile	/^EXEC     = memTest$/;"	m
+EXEC	Makefile	/^all:   EXEC  = memTest$/;"	m
+EXEC	Makefile	/^debug: EXEC  = memTest.debug$/;"	m
+HOME_KEY	include/cmdCharDef.h	/^   HOME_KEY         = 49 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+HOME_KEY	include/cmdCharDef.h	/^   HOME_KEY         = TA_HOME_KEY,$/;"	e	enum:ParseChar
+HOME_KEY	src/cmd/cmdCharDef.h	/^   HOME_KEY         = 49 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+HOME_KEY	src/cmd/cmdCharDef.h	/^   HOME_KEY         = TA_HOME_KEY,$/;"	e	enum:ParseChar
+INPUT_END_KEY	include/cmdCharDef.h	/^   INPUT_END_KEY    = 4,          \/\/ ctrl-d$/;"	e	enum:ParseChar
+INPUT_END_KEY	include/cmdCharDef.h	/^   INPUT_END_KEY    = TA_INPUT_END_KEY,   \/\/ ctrl-d$/;"	e	enum:ParseChar
+INPUT_END_KEY	src/cmd/cmdCharDef.h	/^   INPUT_END_KEY    = 4,          \/\/ ctrl-d$/;"	e	enum:ParseChar
+INPUT_END_KEY	src/cmd/cmdCharDef.h	/^   INPUT_END_KEY    = TA_INPUT_END_KEY,   \/\/ ctrl-d$/;"	e	enum:ParseChar
+INSERT_KEY	include/cmdCharDef.h	/^   INSERT_KEY       = 50 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+INSERT_KEY	include/cmdCharDef.h	/^   INSERT_KEY       = TA_INSERT_KEY,$/;"	e	enum:ParseChar
+INSERT_KEY	src/cmd/cmdCharDef.h	/^   INSERT_KEY       = 50 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+INSERT_KEY	src/cmd/cmdCharDef.h	/^   INSERT_KEY       = TA_INSERT_KEY,$/;"	e	enum:ParseChar
+LIBPKGS	Makefile	/^LIBPKGS  = $(REFPKGS) $(SRCPKGS)$/;"	m
+LIBS	Makefile	/^LIBS     = $(addprefix -l, $(LIBPKGS))$/;"	m
+LINE_BEGIN_KEY	include/cmdCharDef.h	/^   LINE_BEGIN_KEY   = 1,          \/\/ ctrl-a$/;"	e	enum:ParseChar
+LINE_BEGIN_KEY	include/cmdCharDef.h	/^   LINE_BEGIN_KEY   = TA_LINE_BEGIN_KEY,  \/\/ ctrl-a$/;"	e	enum:ParseChar
+LINE_BEGIN_KEY	src/cmd/cmdCharDef.h	/^   LINE_BEGIN_KEY   = 1,          \/\/ ctrl-a$/;"	e	enum:ParseChar
+LINE_BEGIN_KEY	src/cmd/cmdCharDef.h	/^   LINE_BEGIN_KEY   = TA_LINE_BEGIN_KEY,  \/\/ ctrl-a$/;"	e	enum:ParseChar
+LINE_END_KEY	include/cmdCharDef.h	/^   LINE_END_KEY     = 5,          \/\/ ctrl-e$/;"	e	enum:ParseChar
+LINE_END_KEY	include/cmdCharDef.h	/^   LINE_END_KEY     = TA_LINE_END_KEY,    \/\/ ctrl-e$/;"	e	enum:ParseChar
+LINE_END_KEY	src/cmd/cmdCharDef.h	/^   LINE_END_KEY     = 5,          \/\/ ctrl-e$/;"	e	enum:ParseChar
+LINE_END_KEY	src/cmd/cmdCharDef.h	/^   LINE_END_KEY     = TA_LINE_END_KEY,    \/\/ ctrl-e$/;"	e	enum:ParseChar
+MAIN	Makefile	/^MAIN     = main$/;"	m
+MEM_CMD_H	src/mem/memCmd.h	/^#define MEM_CMD_H$/;"	d
+MEM_MGR_H	src/mem/memMgr.h	/^#define MEM_MGR_H$/;"	d
+MEM_MGR_INIT	src/mem/memMgr.h	/^#define MEM_MGR_INIT(/;"	d
+MEM_TEST_H	src/mem/memTest.h	/^#define MEM_TEST_H$/;"	d
+MOD_KEY_BEGIN	include/cmdCharDef.h	/^   MOD_KEY_BEGIN    = HOME_KEY,$/;"	e	enum:ParseChar
+MOD_KEY_BEGIN	include/cmdCharDef.h	/^   MOD_KEY_BEGIN    = TA_MOD_KEY_BEGIN,$/;"	e	enum:ParseChar
+MOD_KEY_BEGIN	src/cmd/cmdCharDef.h	/^   MOD_KEY_BEGIN    = HOME_KEY,$/;"	e	enum:ParseChar
+MOD_KEY_BEGIN	src/cmd/cmdCharDef.h	/^   MOD_KEY_BEGIN    = TA_MOD_KEY_BEGIN,$/;"	e	enum:ParseChar
+MOD_KEY_DUMMY	include/cmdCharDef.h	/^   MOD_KEY_DUMMY    = 126,$/;"	e	enum:ParseChar
+MOD_KEY_DUMMY	include/cmdCharDef.h	/^   MOD_KEY_DUMMY    = TA_MOD_KEY_DUMMY,$/;"	e	enum:ParseChar
+MOD_KEY_DUMMY	src/cmd/cmdCharDef.h	/^   MOD_KEY_DUMMY    = 126,$/;"	e	enum:ParseChar
+MOD_KEY_DUMMY	src/cmd/cmdCharDef.h	/^   MOD_KEY_DUMMY    = TA_MOD_KEY_DUMMY,$/;"	e	enum:ParseChar
+MOD_KEY_END	include/cmdCharDef.h	/^   MOD_KEY_END      = PG_DOWN_KEY,$/;"	e	enum:ParseChar
+MOD_KEY_END	include/cmdCharDef.h	/^   MOD_KEY_END      = TA_MOD_KEY_END,$/;"	e	enum:ParseChar
+MOD_KEY_END	src/cmd/cmdCharDef.h	/^   MOD_KEY_END      = PG_DOWN_KEY,$/;"	e	enum:ParseChar
+MOD_KEY_END	src/cmd/cmdCharDef.h	/^   MOD_KEY_END      = TA_MOD_KEY_END,$/;"	e	enum:ParseChar
+MOD_KEY_FLAG	include/cmdCharDef.h	/^   MOD_KEY_FLAG     = 1 << 9,$/;"	e	enum:ParseChar
+MOD_KEY_FLAG	include/cmdCharDef.h	/^   MOD_KEY_FLAG     = TA_MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+MOD_KEY_FLAG	src/cmd/cmdCharDef.h	/^   MOD_KEY_FLAG     = 1 << 9,$/;"	e	enum:ParseChar
+MOD_KEY_FLAG	src/cmd/cmdCharDef.h	/^   MOD_KEY_FLAG     = TA_MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+MOD_KEY_INT	include/cmdCharDef.h	/^   MOD_KEY_INT      = 91,$/;"	e	enum:ParseChar
+MOD_KEY_INT	include/cmdCharDef.h	/^   MOD_KEY_INT      = TA_MOD_KEY_INT,$/;"	e	enum:ParseChar
+MOD_KEY_INT	src/cmd/cmdCharDef.h	/^   MOD_KEY_INT      = 91,$/;"	e	enum:ParseChar
+MOD_KEY_INT	src/cmd/cmdCharDef.h	/^   MOD_KEY_INT      = TA_MOD_KEY_INT,$/;"	e	enum:ParseChar
+MTDeleteCmd	src/mem/memCmd.h	/^CmdClass(MTDeleteCmd);$/;"	v
+MTNewCmd	src/mem/memCmd.h	/^CmdClass(MTNewCmd);$/;"	v
+MTPrintCmd	src/mem/memCmd.h	/^CmdClass(MTPrintCmd);$/;"	v
+MTResetCmd	src/mem/memCmd.h	/^CmdClass(MTResetCmd);$/;"	v
+MYCLK_TCK	include/myUsage.h	/^#define MYCLK_TCK /;"	d
+MYCLK_TCK	include/myUsage.h	/^#undef MYCLK_TCK$/;"	d
+MYCLK_TCK	src/util/myUsage.h	/^#define MYCLK_TCK /;"	d
+MYCLK_TCK	src/util/myUsage.h	/^#undef MYCLK_TCK$/;"	d
+MY_USAGE_H	include/myUsage.h	/^#define MY_USAGE_H$/;"	d
+MY_USAGE_H	src/util/myUsage.h	/^#define MY_USAGE_H$/;"	d
+MemBlock	src/mem/memMgr.h	/^   MemBlock(MemBlock<T>* n, size_t b) : _nextBlock(n) {$/;"	f	class:MemBlock
+MemBlock	src/mem/memMgr.h	/^class MemBlock$/;"	c
+MemMgr	src/mem/memMgr.h	/^   MemMgr(size_t b = 65536) : _blockSize(b) {$/;"	f	class:MemMgr
+MemMgr	src/mem/memMgr.h	/^class MemMgr$/;"	c
+MemRecycleList	src/mem/memMgr.h	/^   MemRecycleList(size_t a = 0) : _arrSize(a), _first(0), _nextList(0) {}$/;"	f	class:MemRecycleList
+MemRecycleList	src/mem/memMgr.h	/^class MemRecycleList$/;"	c
+MemTest	src/mem/memTest.h	/^   MemTest() { _objList.reserve(1024); _arrList.reserve(1024); }$/;"	f	class:MemTest
+MemTest	src/mem/memTest.h	/^class MemTest$/;"	c
+MemTestObj	src/mem/memTest.h	/^   MemTestObj() {}$/;"	f	class:MemTestObj
+MemTestObj	src/mem/memTest.h	/^class MemTestObj$/;"	c
+MyUsage	include/myUsage.h	/^   MyUsage() { reset(); }$/;"	f	class:MyUsage
+MyUsage	include/myUsage.h	/^class MyUsage$/;"	c
+MyUsage	src/util/myUsage.h	/^   MyUsage() { reset(); }$/;"	f	class:MyUsage
+MyUsage	src/util/myUsage.h	/^class MyUsage$/;"	c
+NEWLINE_KEY	include/cmdCharDef.h	/^   NEWLINE_KEY      = TA_NEWLINE_KEY,     \/\/ enter('\\n') or ctrl-m$/;"	e	enum:ParseChar
+NEWLINE_KEY	include/cmdCharDef.h	/^   NEWLINE_KEY      = int('\\n'),  \/\/ enter('\\n') or ctrl-m$/;"	e	enum:ParseChar
+NEWLINE_KEY	src/cmd/cmdCharDef.h	/^   NEWLINE_KEY      = TA_NEWLINE_KEY,     \/\/ enter('\\n') or ctrl-m$/;"	e	enum:ParseChar
+NEWLINE_KEY	src/cmd/cmdCharDef.h	/^   NEWLINE_KEY      = int('\\n'),  \/\/ enter('\\n') or ctrl-m$/;"	e	enum:ParseChar
+PARSE_CHAR_END	include/cmdCharDef.h	/^   PARSE_CHAR_END$/;"	e	enum:ParseChar
+PARSE_CHAR_END	src/cmd/cmdCharDef.h	/^   PARSE_CHAR_END$/;"	e	enum:ParseChar
+PG_DOWN_KEY	include/cmdCharDef.h	/^   PG_DOWN_KEY      = 54 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+PG_DOWN_KEY	include/cmdCharDef.h	/^   PG_DOWN_KEY      = TA_PG_DOWN_KEY,$/;"	e	enum:ParseChar
+PG_DOWN_KEY	src/cmd/cmdCharDef.h	/^   PG_DOWN_KEY      = 54 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+PG_DOWN_KEY	src/cmd/cmdCharDef.h	/^   PG_DOWN_KEY      = TA_PG_DOWN_KEY,$/;"	e	enum:ParseChar
+PG_OFFSET	include/cmdParser.h	/^#define PG_OFFSET /;"	d
+PG_OFFSET	src/cmd/cmdParser.h	/^#define PG_OFFSET /;"	d
+PG_UP_KEY	include/cmdCharDef.h	/^   PG_UP_KEY        = 53 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+PG_UP_KEY	include/cmdCharDef.h	/^   PG_UP_KEY        = TA_PG_UP_KEY,$/;"	e	enum:ParseChar
+PG_UP_KEY	src/cmd/cmdCharDef.h	/^   PG_UP_KEY        = 53 + MOD_KEY_FLAG,$/;"	e	enum:ParseChar
+PG_UP_KEY	src/cmd/cmdCharDef.h	/^   PG_UP_KEY        = TA_PG_UP_KEY,$/;"	e	enum:ParseChar
+ParseChar	include/cmdCharDef.h	/^enum ParseChar$/;"	g
+ParseChar	src/cmd/cmdCharDef.h	/^enum ParseChar$/;"	g
+READ_BUF_SIZE	include/cmdParser.h	/^#define READ_BUF_SIZE /;"	d
+READ_BUF_SIZE	src/cmd/cmdParser.h	/^#define READ_BUF_SIZE /;"	d
+REFPKGS	Makefile	/^REFPKGS  = cmd$/;"	m
+RN_GEN_H	include/rnGen.h	/^#define RN_GEN_H$/;"	d
+RN_GEN_H	src/util/rnGen.h	/^#define RN_GEN_H$/;"	d
+R_SIZE	src/mem/memMgr.h	/^#define R_SIZE /;"	d
+RandomNumGen	include/rnGen.h	/^      RandomNumGen() { my_srandom(getpid()); }$/;"	f	class:RandomNumGen
+RandomNumGen	include/rnGen.h	/^      RandomNumGen(unsigned seed) { my_srandom(seed); }$/;"	f	class:RandomNumGen
+RandomNumGen	include/rnGen.h	/^class RandomNumGen$/;"	c
+RandomNumGen	src/util/rnGen.h	/^      RandomNumGen() { my_srandom(getpid()); }$/;"	f	class:RandomNumGen
+RandomNumGen	src/util/rnGen.h	/^      RandomNumGen(unsigned seed) { my_srandom(seed); }$/;"	f	class:RandomNumGen
+RandomNumGen	src/util/rnGen.h	/^class RandomNumGen$/;"	c
+S	src/mem/memMgr.h	/^   #define S /;"	d
+SIZE_T	src/mem/memMgr.h	/^#define SIZE_T /;"	d
+SIZE_T_1	src/mem/memMgr.h	/^#define SIZE_T_1 /;"	d
+SRCLIBS	Makefile	/^SRCLIBS  = $(addsuffix .a, $(addprefix lib, $(SRCPKGS)))$/;"	m
+SRCPKGS	Makefile	/^SRCPKGS  = mem util$/;"	m
+TAB_KEY	include/cmdCharDef.h	/^   TAB_KEY          = TA_TAB_KEY,         \/\/ tab('\\t') or Ctrl-i$/;"	e	enum:ParseChar
+TAB_KEY	include/cmdCharDef.h	/^   TAB_KEY          = int('\\t'),  \/\/ tab('\\t') or Ctrl-i$/;"	e	enum:ParseChar
+TAB_KEY	src/cmd/cmdCharDef.h	/^   TAB_KEY          = TA_TAB_KEY,         \/\/ tab('\\t') or Ctrl-i$/;"	e	enum:ParseChar
+TAB_KEY	src/cmd/cmdCharDef.h	/^   TAB_KEY          = int('\\t'),  \/\/ tab('\\t') or Ctrl-i$/;"	e	enum:ParseChar
+TA_ARROW_DOWN_KEY	include/cmdCharDef.h	/^#define TA_ARROW_DOWN_KEY /;"	d
+TA_ARROW_DOWN_KEY	src/cmd/cmdCharDef.h	/^#define TA_ARROW_DOWN_KEY /;"	d
+TA_ARROW_KEY_BEGIN	include/cmdCharDef.h	/^#define TA_ARROW_KEY_BEGIN /;"	d
+TA_ARROW_KEY_BEGIN	src/cmd/cmdCharDef.h	/^#define TA_ARROW_KEY_BEGIN /;"	d
+TA_ARROW_KEY_END	include/cmdCharDef.h	/^#define TA_ARROW_KEY_END /;"	d
+TA_ARROW_KEY_END	src/cmd/cmdCharDef.h	/^#define TA_ARROW_KEY_END /;"	d
+TA_ARROW_KEY_FLAG	include/cmdCharDef.h	/^#define TA_ARROW_KEY_FLAG /;"	d
+TA_ARROW_KEY_FLAG	src/cmd/cmdCharDef.h	/^#define TA_ARROW_KEY_FLAG /;"	d
+TA_ARROW_KEY_INT	include/cmdCharDef.h	/^#define TA_ARROW_KEY_INT /;"	d
+TA_ARROW_KEY_INT	src/cmd/cmdCharDef.h	/^#define TA_ARROW_KEY_INT /;"	d
+TA_ARROW_LEFT_KEY	include/cmdCharDef.h	/^#define TA_ARROW_LEFT_KEY /;"	d
+TA_ARROW_LEFT_KEY	src/cmd/cmdCharDef.h	/^#define TA_ARROW_LEFT_KEY /;"	d
+TA_ARROW_RIGHT_KEY	include/cmdCharDef.h	/^#define TA_ARROW_RIGHT_KEY /;"	d
+TA_ARROW_RIGHT_KEY	src/cmd/cmdCharDef.h	/^#define TA_ARROW_RIGHT_KEY /;"	d
+TA_ARROW_UP_KEY	include/cmdCharDef.h	/^#define TA_ARROW_UP_KEY /;"	d
+TA_ARROW_UP_KEY	src/cmd/cmdCharDef.h	/^#define TA_ARROW_UP_KEY /;"	d
+TA_BACK_SPACE_CHAR	include/cmdCharDef.h	/^#define TA_BACK_SPACE_CHAR /;"	d
+TA_BACK_SPACE_CHAR	src/cmd/cmdCharDef.h	/^#define TA_BACK_SPACE_CHAR /;"	d
+TA_BACK_SPACE_KEY	include/cmdCharDef.h	/^#define TA_BACK_SPACE_KEY /;"	d
+TA_BACK_SPACE_KEY	src/cmd/cmdCharDef.h	/^#define TA_BACK_SPACE_KEY /;"	d
+TA_BEEP_CHAR	include/cmdCharDef.h	/^#define TA_BEEP_CHAR /;"	d
+TA_BEEP_CHAR	src/cmd/cmdCharDef.h	/^#define TA_BEEP_CHAR /;"	d
+TA_DELETE_KEY	include/cmdCharDef.h	/^#define TA_DELETE_KEY /;"	d
+TA_DELETE_KEY	src/cmd/cmdCharDef.h	/^#define TA_DELETE_KEY /;"	d
+TA_END_KEY	include/cmdCharDef.h	/^#define TA_END_KEY /;"	d
+TA_END_KEY	src/cmd/cmdCharDef.h	/^#define TA_END_KEY /;"	d
+TA_ESC_KEY	include/cmdCharDef.h	/^#define TA_ESC_KEY /;"	d
+TA_ESC_KEY	src/cmd/cmdCharDef.h	/^#define TA_ESC_KEY /;"	d
+TA_HOME_KEY	include/cmdCharDef.h	/^#define TA_HOME_KEY /;"	d
+TA_HOME_KEY	src/cmd/cmdCharDef.h	/^#define TA_HOME_KEY /;"	d
+TA_INPUT_END_KEY	include/cmdCharDef.h	/^#define TA_INPUT_END_KEY /;"	d
+TA_INPUT_END_KEY	src/cmd/cmdCharDef.h	/^#define TA_INPUT_END_KEY /;"	d
+TA_INSERT_KEY	include/cmdCharDef.h	/^#define TA_INSERT_KEY /;"	d
+TA_INSERT_KEY	src/cmd/cmdCharDef.h	/^#define TA_INSERT_KEY /;"	d
+TA_LINE_BEGIN_KEY	include/cmdCharDef.h	/^#define TA_LINE_BEGIN_KEY /;"	d
+TA_LINE_BEGIN_KEY	src/cmd/cmdCharDef.h	/^#define TA_LINE_BEGIN_KEY /;"	d
+TA_LINE_END_KEY	include/cmdCharDef.h	/^#define TA_LINE_END_KEY /;"	d
+TA_LINE_END_KEY	src/cmd/cmdCharDef.h	/^#define TA_LINE_END_KEY /;"	d
+TA_MOD_KEY_BEGIN	include/cmdCharDef.h	/^#define TA_MOD_KEY_BEGIN /;"	d
+TA_MOD_KEY_BEGIN	src/cmd/cmdCharDef.h	/^#define TA_MOD_KEY_BEGIN /;"	d
+TA_MOD_KEY_DUMMY	include/cmdCharDef.h	/^#define TA_MOD_KEY_DUMMY /;"	d
+TA_MOD_KEY_DUMMY	src/cmd/cmdCharDef.h	/^#define TA_MOD_KEY_DUMMY /;"	d
+TA_MOD_KEY_END	include/cmdCharDef.h	/^#define TA_MOD_KEY_END /;"	d
+TA_MOD_KEY_END	src/cmd/cmdCharDef.h	/^#define TA_MOD_KEY_END /;"	d
+TA_MOD_KEY_FLAG	include/cmdCharDef.h	/^#define TA_MOD_KEY_FLAG /;"	d
+TA_MOD_KEY_FLAG	src/cmd/cmdCharDef.h	/^#define TA_MOD_KEY_FLAG /;"	d
+TA_MOD_KEY_INT	include/cmdCharDef.h	/^#define TA_MOD_KEY_INT /;"	d
+TA_MOD_KEY_INT	src/cmd/cmdCharDef.h	/^#define TA_MOD_KEY_INT /;"	d
+TA_NEWLINE_KEY	include/cmdCharDef.h	/^#define TA_NEWLINE_KEY /;"	d
+TA_NEWLINE_KEY	src/cmd/cmdCharDef.h	/^#define TA_NEWLINE_KEY /;"	d
+TA_PG_DOWN_KEY	include/cmdCharDef.h	/^#define TA_PG_DOWN_KEY /;"	d
+TA_PG_DOWN_KEY	src/cmd/cmdCharDef.h	/^#define TA_PG_DOWN_KEY /;"	d
+TA_PG_UP_KEY	include/cmdCharDef.h	/^#define TA_PG_UP_KEY /;"	d
+TA_PG_UP_KEY	src/cmd/cmdCharDef.h	/^#define TA_PG_UP_KEY /;"	d
+TA_TAB_KEY	include/cmdCharDef.h	/^#define TA_TAB_KEY /;"	d
+TA_TAB_KEY	src/cmd/cmdCharDef.h	/^#define TA_TAB_KEY /;"	d
+TA_UNDEFINED_KEY	include/cmdCharDef.h	/^#define TA_UNDEFINED_KEY /;"	d
+TA_UNDEFINED_KEY	src/cmd/cmdCharDef.h	/^#define TA_UNDEFINED_KEY /;"	d
+UNDEFINED_KEY	include/cmdCharDef.h	/^   UNDEFINED_KEY    = TA_UNDEFINED_KEY,$/;"	e	enum:ParseChar
+UNDEFINED_KEY	include/cmdCharDef.h	/^   UNDEFINED_KEY  = INT_MAX,$/;"	e	enum:ParseChar
+UNDEFINED_KEY	src/cmd/cmdCharDef.h	/^   UNDEFINED_KEY    = TA_UNDEFINED_KEY,$/;"	e	enum:ParseChar
+UNDEFINED_KEY	src/cmd/cmdCharDef.h	/^   UNDEFINED_KEY  = INT_MAX,$/;"	e	enum:ParseChar
+USE_MEM_MGR	src/mem/memMgr.h	/^#define USE_MEM_MGR(/;"	d
+UTIL_H	include/util.h	/^#define UTIL_H$/;"	d
+UTIL_H	src/util/util.h	/^#define UTIL_H$/;"	d
+_activeBlock	src/mem/memMgr.h	/^   MemBlock<T>*               _activeBlock;$/;"	m	class:MemMgr
+_arrList	src/mem/memTest.h	/^   vector<MemTestObj*>   _arrList;$/;"	m	class:MemTest
+_arrSize	src/mem/memMgr.h	/^   size_t              _arrSize;   \/\/ the array size of the recycled data$/;"	m	class:MemRecycleList
+_begin	src/mem/memMgr.h	/^   char*             _begin;$/;"	m	class:MemBlock
+_blockSize	src/mem/memMgr.h	/^   size_t                     _blockSize;$/;"	m	class:MemMgr
+_cmdMap	include/cmdParser.h	/^   CmdMap    _cmdMap;                \/\/ map from string to command$/;"	m	class:CmdParser
+_cmdMap	src/cmd/cmdParser.h	/^   CmdMap    _cmdMap;                \/\/ map from string to command$/;"	m	class:CmdParser
+_currentMem	include/myUsage.h	/^   double     _currentMem;$/;"	m	class:MyUsage
+_currentMem	src/util/myUsage.h	/^   double     _currentMem;$/;"	m	class:MyUsage
+_currentTick	include/myUsage.h	/^   double     _currentTick;$/;"	m	class:MyUsage
+_currentTick	src/util/myUsage.h	/^   double     _currentTick;$/;"	m	class:MyUsage
+_dataB	src/mem/memTest.h	/^   bool    _dataB;     \/\/ 4*1 (1)$/;"	m	class:MemTestObj
+_dataC	src/mem/memTest.h	/^   char    _dataC;     \/\/ 4*1 (1)$/;"	m	class:MemTestObj
+_dataF	src/mem/memTest.h	/^   float   _dataF[3];  \/\/ 4*3$/;"	m	class:MemTestObj
+_dataI	src/mem/memTest.h	/^   int     _dataI[5];  \/\/ 4*5$/;"	m	class:MemTestObj
+_dataSI	src/mem/memTest.h	/^   short   _dataSI;    \/\/ 4*1 (2)$/;"	m	class:MemTestObj
+_dofile	include/cmdParser.h	/^   ifstream* _dofile;                \/\/ for command script$/;"	m	class:CmdParser
+_dofile	src/cmd/cmdParser.h	/^   ifstream* _dofile;                \/\/ for command script$/;"	m	class:CmdParser
+_dofileStack	include/cmdParser.h	/^   stack<ifstream*> _dofileStack;    \/\/ For recursive dofile calling$/;"	m	class:CmdParser
+_dofileStack	src/cmd/cmdParser.h	/^   stack<ifstream*> _dofileStack;    \/\/ For recursive dofile calling$/;"	m	class:CmdParser
+_end	src/mem/memMgr.h	/^   char*             _end;$/;"	m	class:MemBlock
+_first	src/mem/memMgr.h	/^   T*                  _first;     \/\/ the first recycled data$/;"	m	class:MemRecycleList
+_history	include/cmdParser.h	/^   vector<string>   _history;        \/\/ oldest:_history[0],latest:_hist.back()$/;"	m	class:CmdParser
+_history	src/cmd/cmdParser.h	/^   vector<string>   _history;        \/\/ oldest:_history[0],latest:_hist.back()$/;"	m	class:CmdParser
+_historyIdx	include/cmdParser.h	/^   int       _historyIdx;            \/\/ (1) Position to insert history string$/;"	m	class:CmdParser
+_historyIdx	src/cmd/cmdParser.h	/^   int       _historyIdx;            \/\/ (1) Position to insert history string$/;"	m	class:CmdParser
+_initMem	include/myUsage.h	/^   double     _initMem;$/;"	m	class:MyUsage
+_initMem	src/util/myUsage.h	/^   double     _initMem;$/;"	m	class:MyUsage
+_nextBlock	src/mem/memMgr.h	/^   MemBlock<T>*      _nextBlock;$/;"	m	class:MemBlock
+_nextList	src/mem/memMgr.h	/^   MemRecycleList<T>*  _nextList;  \/\/ next MemRecycleList$/;"	m	class:MemRecycleList
+_objList	src/mem/memTest.h	/^   vector<MemTestObj*>   _objList;$/;"	m	class:MemTest
+_optCmd	include/cmdParser.h	/^   string            _optCmd;$/;"	m	class:CmdExec
+_optCmd	src/cmd/cmdParser.h	/^   string            _optCmd;$/;"	m	class:CmdExec
+_periodUsedTime	include/myUsage.h	/^   double     _periodUsedTime;$/;"	m	class:MyUsage
+_periodUsedTime	src/util/myUsage.h	/^   double     _periodUsedTime;$/;"	m	class:MyUsage
+_prompt	include/cmdParser.h	/^   const string _prompt;             \/\/ command prompt$/;"	m	class:CmdParser
+_prompt	src/cmd/cmdParser.h	/^   const string _prompt;             \/\/ command prompt$/;"	m	class:CmdParser
+_ptr	src/mem/memMgr.h	/^   char*             _ptr;$/;"	m	class:MemBlock
+_readBuf	include/cmdParser.h	/^   char      _readBuf[READ_BUF_SIZE];\/\/ save the current line input$/;"	m	class:CmdParser
+_readBuf	src/cmd/cmdParser.h	/^   char      _readBuf[READ_BUF_SIZE];\/\/ save the current line input$/;"	m	class:CmdParser
+_readBufEnd	include/cmdParser.h	/^   char*     _readBufEnd;            \/\/ end of string position of _readBuf$/;"	m	class:CmdParser
+_readBufEnd	src/cmd/cmdParser.h	/^   char*     _readBufEnd;            \/\/ end of string position of _readBuf$/;"	m	class:CmdParser
+_readBufPtr	include/cmdParser.h	/^   char*     _readBufPtr;            \/\/ point to the cursor position$/;"	m	class:CmdParser
+_readBufPtr	src/cmd/cmdParser.h	/^   char*     _readBufPtr;            \/\/ point to the cursor position$/;"	m	class:CmdParser
+_recycleList	src/mem/memMgr.h	/^   MemRecycleList<T>          _recycleList[R_SIZE];$/;"	m	class:MemMgr
+_tabPressCount	include/cmdParser.h	/^   size_t    _tabPressCount;         \/\/ The number of tab pressed$/;"	m	class:CmdParser
+_tabPressCount	src/cmd/cmdParser.h	/^   size_t    _tabPressCount;         \/\/ The number of tab pressed$/;"	m	class:CmdParser
+_tempCmdStored	include/cmdParser.h	/^   bool      _tempCmdStored;         \/\/ When up\/pgUp is pressed, current line$/;"	m	class:CmdParser
+_tempCmdStored	src/cmd/cmdParser.h	/^   bool      _tempCmdStored;         \/\/ When up\/pgUp is pressed, current line$/;"	m	class:CmdParser
+_totalUsedTime	include/myUsage.h	/^   double     _totalUsedTime;$/;"	m	class:MyUsage
+_totalUsedTime	src/util/myUsage.h	/^   double     _totalUsedTime;$/;"	m	class:MyUsage
+alloc	src/mem/memMgr.h	/^   T* alloc(size_t t) {$/;"	f	class:MemMgr
+allocArr	src/mem/memMgr.h	/^   T* allocArr(size_t t) {$/;"	f	class:MemMgr
+checkMem	include/myUsage.h	/^   double checkMem() const {$/;"	f	class:MyUsage
+checkMem	src/util/myUsage.h	/^   double checkMem() const {$/;"	f	class:MyUsage
+checkTick	include/myUsage.h	/^   double checkTick() const {$/;"	f	class:MyUsage
+checkTick	src/util/myUsage.h	/^   double checkTick() const {$/;"	f	class:MyUsage
+clearList	include/util.h	/^void clearList(T& l)$/;"	f
+clearList	src/util/util.h	/^void clearList(T& l)$/;"	f
+deleteArr	src/mem/memTest.h	/^   void deleteArr(size_t idx) {$/;"	f	class:MemTest
+deleteObj	src/mem/memTest.h	/^   void deleteObj(size_t idx) {$/;"	f	class:MemTest
+downtoSizeT	src/mem/memMgr.h	/^#define downtoSizeT(/;"	d
+exec	src/mem/memCmd.cpp	/^MTDeleteCmd::exec(const string& option)$/;"	f	class:MTDeleteCmd
+exec	src/mem/memCmd.cpp	/^MTNewCmd::exec(const string& option)$/;"	f	class:MTNewCmd
+exec	src/mem/memCmd.cpp	/^MTPrintCmd::exec(const string& option)$/;"	f	class:MTPrintCmd
+exec	src/mem/memCmd.cpp	/^MTResetCmd::exec(const string& option)$/;"	f	class:MTResetCmd
+free	src/mem/memMgr.h	/^   void  free(T* p) {$/;"	f	class:MemMgr
+freeArr	src/mem/memMgr.h	/^   void  freeArr(T* p) {$/;"	f	class:MemMgr
+getArrListSize	src/mem/memTest.h	/^   size_t getArrListSize() const { return _arrList.size(); }$/;"	f	class:MemTest
+getArrSize	src/mem/memMgr.h	/^   size_t getArrSize() const { return _arrSize; }$/;"	f	class:MemRecycleList
+getArraySize	src/mem/memMgr.h	/^   size_t getArraySize(size_t t) const {$/;"	f	class:MemMgr
+getHashSize	src/util/util.cpp	/^size_t getHashSize(size_t s) {$/;"	f
+getMem	src/mem/memMgr.h	/^   T* getMem(size_t t) {$/;"	f	class:MemMgr
+getMem	src/mem/memMgr.h	/^   bool getMem(size_t t, T*& ret) {$/;"	f	class:MemBlock
+getMemRecycleList	src/mem/memMgr.h	/^   MemRecycleList<T>* getMemRecycleList(size_t n) {$/;"	f	class:MemMgr
+getNextBlock	src/mem/memMgr.h	/^   MemBlock<T>* getNextBlock() const { return _nextBlock; }$/;"	f	class:MemBlock
+getNextList	src/mem/memMgr.h	/^   MemRecycleList<T>* getNextList() const { return _nextList; }$/;"	f	class:MemRecycleList
+getNumBlocks	src/mem/memMgr.h	/^   size_t getNumBlocks() const {$/;"	f	class:MemMgr
+getObjListSize	src/mem/memTest.h	/^   size_t getObjListSize() const { return _objList.size(); }$/;"	f	class:MemTest
+getOptCmd	include/cmdParser.h	/^   const string& getOptCmd() const { return _optCmd; }$/;"	f	class:CmdExec
+getOptCmd	src/cmd/cmdParser.h	/^   const string& getOptCmd() const { return _optCmd; }$/;"	f	class:CmdExec
+getRemainSize	src/mem/memMgr.h	/^   size_t getRemainSize() const { return size_t(_end - _ptr); }$/;"	f	class:MemBlock
+help	src/mem/memCmd.cpp	/^MTDeleteCmd::help() const$/;"	f	class:MTDeleteCmd
+help	src/mem/memCmd.cpp	/^MTNewCmd::help() const$/;"	f	class:MTNewCmd
+help	src/mem/memCmd.cpp	/^MTPrintCmd::help() const$/;"	f	class:MTPrintCmd
+help	src/mem/memCmd.cpp	/^MTResetCmd::help() const$/;"	f	class:MTResetCmd
+initMemCmd	src/mem/memCmd.cpp	/^initMemCmd()$/;"	f
+isValidVarName	src/util/myString.cpp	/^isValidVarName(const string& str)$/;"	f
+listDir	src/util/util.cpp	/^int listDir$/;"	f
+main	src/main/main.cpp	/^main(int argc, char** argv)$/;"	f
+mtest	src/mem/memTest.cpp	/^MemTest mtest;$/;"	v
+myGetChar	src/util/myGetChar.cpp	/^char myGetChar()$/;"	f
+myGetChar	src/util/myGetChar.cpp	/^char myGetChar(istream& istr)$/;"	f
+myStr2Int	src/util/myString.cpp	/^myStr2Int(const string& str, int& num)$/;"	f
+myStrGetTok	src/util/myString.cpp	/^myStrGetTok(const string& str, string& tok, size_t pos = 0,$/;"	f
+myStrNCmp	src/util/myString.cpp	/^myStrNCmp(const string& s1, const string& s2, unsigned n)$/;"	f
+myUsage	src/util/util.cpp	/^MyUsage       myUsage;$/;"	v
+my_random	include/rnGen.h	/^#define my_random /;"	d
+my_random	src/util/rnGen.h	/^#define my_random /;"	d
+my_srandom	include/rnGen.h	/^#define my_srandom /;"	d
+my_srandom	src/util/rnGen.h	/^#define my_srandom /;"	d
+myexit	src/main/main.cpp	/^myexit()$/;"	f	file:
+newArrs	src/mem/memTest.h	/^   void newArrs(size_t n, size_t s) {$/;"	f	class:MemTest
+newObjs	src/mem/memTest.h	/^   void newObjs(size_t n) {$/;"	f	class:MemTest
+numElm	src/mem/memMgr.h	/^   size_t numElm() const {$/;"	f	class:MemRecycleList
+operator ()	include/rnGen.h	/^      const int operator() (const int range) const {$/;"	f	class:RandomNumGen
+operator ()	src/util/rnGen.h	/^      const int operator() (const int range) const {$/;"	f	class:RandomNumGen
+popFront	src/mem/memMgr.h	/^   T* popFront() {$/;"	f	class:MemRecycleList
+print	src/mem/memMgr.h	/^   void print() const {$/;"	f	class:MemMgr
+print	src/mem/memTest.h	/^   void print() const {$/;"	f	class:MemTest
+printPrompt	include/cmdParser.h	/^   void printPrompt() const { cout << _prompt; }$/;"	f	class:CmdParser
+printPrompt	src/cmd/cmdParser.h	/^   void printPrompt() const { cout << _prompt; }$/;"	f	class:CmdParser
+pushFront	src/mem/memMgr.h	/^   void  pushFront(T* p) {$/;"	f	class:MemRecycleList
+removeData	include/util.h	/^void removeData(T& l, const D& d)$/;"	f
+removeData	src/util/util.h	/^void removeData(T& l, const D& d)$/;"	f
+report	include/myUsage.h	/^   void report(bool repTime, bool repMem) {$/;"	f	class:MyUsage
+report	src/util/myUsage.h	/^   void report(bool repTime, bool repMem) {$/;"	f	class:MyUsage
+reset	include/myUsage.h	/^   void reset() {$/;"	f	class:MyUsage
+reset	src/mem/memMgr.h	/^   void reset() { _ptr = _begin; }$/;"	f	class:MemBlock
+reset	src/mem/memMgr.h	/^   void reset() {$/;"	f	class:MemRecycleList
+reset	src/mem/memMgr.h	/^   void reset(size_t b = 0) {$/;"	f	class:MemMgr
+reset	src/mem/memTest.h	/^   void reset(size_t b = 0) {$/;"	f	class:MemTest
+reset	src/util/myUsage.h	/^   void reset() {$/;"	f	class:MyUsage
+resetBufAndPrintPrompt	include/cmdParser.h	/^   void resetBufAndPrintPrompt() {$/;"	f	class:CmdParser
+resetBufAndPrintPrompt	src/cmd/cmdParser.h	/^   void resetBufAndPrintPrompt() {$/;"	f	class:CmdParser
+reset_keypress	src/util/myGetChar.cpp	/^static void reset_keypress(void)$/;"	f	file:
+setMemUsage	include/myUsage.h	/^   void setMemUsage() { _currentMem = checkMem() - _initMem; }$/;"	f	class:MyUsage
+setMemUsage	src/util/myUsage.h	/^   void setMemUsage() { _currentMem = checkMem() - _initMem; }$/;"	f	class:MyUsage
+setNextList	src/mem/memMgr.h	/^   void setNextList(MemRecycleList<T>* l) { _nextList = l; }$/;"	f	class:MemRecycleList
+setOptCmd	include/cmdParser.h	/^   void setOptCmd(const string& str) { _optCmd = str; }$/;"	f	class:CmdExec
+setOptCmd	src/cmd/cmdParser.h	/^   void setOptCmd(const string& str) { _optCmd = str; }$/;"	f	class:CmdExec
+setTimeUsage	include/myUsage.h	/^   void setTimeUsage() {$/;"	f	class:MyUsage
+setTimeUsage	src/util/myUsage.h	/^   void setTimeUsage() {$/;"	f	class:MyUsage
+set_keypress	src/util/myGetChar.cpp	/^static void set_keypress(void)$/;"	f	file:
+stored_settings	src/util/myGetChar.cpp	/^static struct termios stored_settings;$/;"	v	typeref:struct:termios	file:
+taTestOnly	include/cmdParser.h	/^   void taTestOnly() {}$/;"	f	class:CmdParser
+taTestOnly	src/cmd/cmdParser.h	/^   void taTestOnly() {}$/;"	f	class:CmdParser
+toSizeT	src/mem/memMgr.h	/^#define toSizeT(/;"	d
+usage	src/main/main.cpp	/^usage()$/;"	f	file:
+usage	src/mem/memCmd.cpp	/^MTDeleteCmd::usage(ostream& os) const$/;"	f	class:MTDeleteCmd
+usage	src/mem/memCmd.cpp	/^MTNewCmd::usage(ostream& os) const$/;"	f	class:MTNewCmd
+usage	src/mem/memCmd.cpp	/^MTPrintCmd::usage(ostream& os) const$/;"	f	class:MTPrintCmd
+usage	src/mem/memCmd.cpp	/^MTResetCmd::usage(ostream& os) const$/;"	f	class:MTResetCmd
+~CmdExec	include/cmdParser.h	/^   virtual ~CmdExec() {}$/;"	f	class:CmdExec
+~CmdExec	src/cmd/cmdParser.h	/^   virtual ~CmdExec() {}$/;"	f	class:CmdExec
+~CmdParser	include/cmdParser.h	/^   virtual ~CmdParser() {}$/;"	f	class:CmdParser
+~CmdParser	src/cmd/cmdParser.h	/^   virtual ~CmdParser() {}$/;"	f	class:CmdParser
+~MemBlock	src/mem/memMgr.h	/^   ~MemBlock() { delete [] _begin; }$/;"	f	class:MemBlock
+~MemMgr	src/mem/memMgr.h	/^   ~MemMgr() { reset(); delete _activeBlock; }$/;"	f	class:MemMgr
+~MemRecycleList	src/mem/memMgr.h	/^   ~MemRecycleList() { reset(); }$/;"	f	class:MemRecycleList
+~MemTest	src/mem/memTest.h	/^   virtual ~MemTest() {}$/;"	f	class:MemTest
+~MemTestObj	src/mem/memTest.h	/^   virtual ~MemTestObj() {}$/;"	f	class:MemTestObj
