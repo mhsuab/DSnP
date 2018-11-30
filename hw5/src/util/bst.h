@@ -59,16 +59,19 @@ public:
     ~iterator() {} // Should NOT delete _node
 
     // TODO: implement these overloaded operators
-    const T& operator * () const { return *(this); }
+    const T& operator * () const { return _node->_data; }
     T& operator * () { return _node->_data; }
     iterator& operator ++ () //++b, find successor
     {
+      assert(_node->_lnode != _node);
+      /*
       if (_node->_lnode == _node)
       {
         _node = _node->_rnode;
         return (*this);
       }
-      else if (_node->_rnode)
+      */
+      if (_node->_rnode)
       {
         _node = _node->_rnode;
         if (_node->_lnode != _node)
@@ -139,15 +142,6 @@ public:
   iterator end() const //handle it youself(but '--' bring back last element)
   {
     return iterator(_tail);
-    /*
-    if (empty()) return iterator(_root);
-    else
-    {
-      iterator cur = iterator(_root);
-      while ((cur._node)->_rnode) cur._node = (cur._node)->_rnode;
-      return cur;
-    }
-    */
   }
   bool empty() const { return (_root == _tail); }
   size_t size() const
@@ -159,179 +153,174 @@ public:
 
   void insert(const T& x)
   {
-    if (empty())
-    {
-      _root = new BSTreeNode<T>(x, _tail, _tail, 0);
+    if (empty()) {
+      _root = new BSTreeNode<T>(x, 0, _tail, 0);
       _tail->_rnode = _tail->_parent = _root;
     }
-    else if (_root->_lnode == _root->_rnode)
-    {
-      if (x >= _root->_data)
-      {
+    else if (_root->_rnode->_rnode == _root) {
+      // size == 1
+      if (x >= _root->_data) {
         BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, _tail, _root);
         _root->_rnode = b;
         _tail->_parent = b;
       }
-      else
-      {
-        BSTreeNode<T>* b = new BSTreeNode<T>(x, _tail, 0, _root);
+      else {
+        BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, 0, _root);
         _root->_lnode = b;
         _tail->_rnode = b;
       }
     }
-    else
-    {
-      BSTreeNode<T>* cur = _root, *prev = _root;
-      while (cur && cur->_lnode != cur)
-      {
+    else {
+      // size != 1
+      BSTreeNode<T>* cur = _root, *prev = _root; //???
+      while (cur && cur->_lnode != cur) {
         prev = cur;
         if (x >= cur->_data) cur = cur->_rnode;
         else cur = cur->_lnode;
       }
-      if (!cur)
-      {
-        BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, 0, prev);
-        if (x >= prev->_data) prev->_rnode = b;
-        else prev->_lnode = b;
-      }
-      else
-      {
-        if (prev == cur->_rnode)
-        {
-          BSTreeNode<T>* b = new BSTreeNode<T>(x, _tail, 0, prev);
+      if (!cur) {
+        if (_tail->_rnode == prev && x < prev->_data) {
+          // leftmost
+          BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, 0, prev);
           prev->_lnode = b;
           _tail->_rnode = b;
         }
-        else
-        {
-          BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, _tail, prev);
-          prev->_rnode = b;
-          _tail->_parent = b;
+        else {
+          // normal
+          BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, 0, prev);
+          if (x >= prev->_data) prev->_rnode = b;
+          else prev->_lnode = b;
         }
-
+      }
+      else {
+        // rightmost
+        BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, _tail, prev);
+        prev->_rnode = b;
+        _tail->_parent = b;
       }
     }
   }
   void pop_front() //remove left most node
   {
     if (empty()) return;
-    erase(begin());
+    else if (_root->_rnode->_rnode == _root) {
+      // size == 1
+      delete _root;
+      _tail->_parent = _tail->_rnode = _tail->_lnode = _tail;
+      _root = _tail;
+    }
+    else {
+      //size != 1
+      if (_tail->_rnode == _root) {
+        // leftmost == _root
+        BSTreeNode<T>* leftmost = (++begin())._node;
+        _tail->_rnode = leftmost;
+        _root = _root->_rnode;
+        delete _root->_parent;
+        _root->_parent = 0;
+      }
+      else if ((_tail->_rnode)->_rnode) {
+        // exist rightnode
+        BSTreeNode<T>* leftmost = (++begin())._node;
+        (_tail->_rnode)->_parent->_lnode = (_tail->_rnode)->_rnode;
+        (_tail->_rnode)->_rnode->_parent = (_tail->_rnode)->_parent;
+        delete _tail->_rnode;
+        _tail->_rnode = leftmost;
+      }
+      else {
+        //no rightnode
+        _tail->_rnode = (_tail->_rnode)->_parent;
+        delete (_tail->_rnode)->_lnode;
+        (_tail->_rnode)->_lnode = 0;
+      }
+    }
   }
   void pop_back() //remove right most node
   {
     if (empty()) return;
-    erase(--end());
+    else if (_root->_rnode->_rnode == _root) {
+      //size == 1
+      pop_front();
+    }
+    else {
+      // size != 1
+      if (_tail->_parent == _root) {
+        // rightmost == _root
+        BSTreeNode<T>* rightmost = (--(--end()))._node;
+        _tail->_parent = rightmost;
+        _root = _root->_lnode;
+        delete _root->_parent;
+        _root->_parent = 0;
+        rightmost->_rnode = _tail;
+      }
+      else if ((_tail->_parent)->_lnode) {
+        // exist leftnode
+        BSTreeNode<T>* rightmost = (--(--end()))._node;
+        (_tail->_parent)->_parent->_rnode = (_tail->_parent)->_lnode;
+        (_tail->_parent)->_lnode->_parent = (_tail->_parent)->_parent;
+        delete _tail->_parent;
+        _tail->_parent = rightmost;
+        rightmost->_rnode = _tail;
+      }
+      else {
+        //no leftnode
+        _tail->_parent = (_tail->_parent)->_parent;
+        delete (_tail->_parent)->_rnode;
+        (_tail->_parent)->_rnode = _tail;
+      }
+    }
   }
 
   // return false if nothing to erase
   bool erase(iterator pos) //erase node at the pos
   {
     if (empty()) return false;
-    else
-    {
-      if (pos == begin() && pos == (--end())) //only one element
-      {
-        delete pos._node;
-        _tail->_parent = _tail->_rnode = _tail->_lnode = _tail;
-        _root = _tail;
-      }
-      else if (pos == begin()) //leftmost
-      {
-        if (pos._node == _root)
-        {
-          _tail->_rnode = pos._node->_rnode;
-          (pos._node->_rnode)->_parent = 0;
-          _root = pos._node->_rnode;
-          delete pos._node;
-        }
-        else if (pos._node->_rnode) //exist rightnode
-        {
-          BSTreeNode<T>* leftmost = pos._node;
-          ++pos;
-          (leftmost->_parent)->_lnode = leftmost->_rnode;
-          (leftmost->_rnode)->_parent = leftmost->_parent;
-          _tail->_rnode = pos._node;
-          pos._node->_lnode = _tail;
-          delete leftmost;
-        }
-        else //no rightnode
-        {
-          _tail->_rnode = pos._node->_parent;
-          (pos._node->_parent)->_lnode = _tail;
-          delete pos._node;
-        }
-      }
-      else if (pos == (--end())) //rightmost
-      {
-        if (pos._node == _root)
-        {
-          _tail->_parent = pos._node->_lnode;
-          (pos._node->_lnode)->_parent = 0;
-          _root = pos._node->_lnode;
-          delete pos._node;
-        }
-        else if (pos._node->_lnode) //exist leftnode
-        {
-          BSTreeNode<T>* rightmost = pos._node;
-          --pos;
-          (rightmost->_parent)->_rnode = rightmost->_lnode;
-          (rightmost->_lnode)->_parent = rightmost->_parent;
-          _tail->_parent = pos._node;
-          pos._node->_rnode = _tail;
-          delete rightmost;
-        }
-        else //no leftnode
-        {
-          _tail->_parent = pos._node->_parent;
-          (pos._node->_parent)->_rnode = _tail;
-          delete pos._node;
-        }
-      }
-      else if (pos._node->_lnode && pos._node->_rnode) //two child
-      {
+    else {
+      if (pos == begin()) { pop_front(); return true; }
+      else if (pos == (--end())) { pop_back(); return true; }
+      if (pos._node->_lnode && pos._node->_rnode) {
+        // two children
         BSTreeNode<T>* cur = pos._node;
         ++pos;
-        swap(cur, pos._node); //????
-        erase(pos);
-      } 
-      else if (pos._node->_lnode || pos._node->_rnode) //one child
-      {
-        if ((pos._node->_parent)->_lnode == pos._node)
-        {
-          if (pos._node->_lnode)
-          {
+        swap(cur, pos._node);
+      }
+      if (pos._node->_lnode || pos._node->_rnode) {
+        // one child
+        if ((pos._node->_parent)->_lnode == pos._node) {
+          // left child
+          if (pos._node->_lnode) {
+            // exist left child
             (pos._node->_parent)->_lnode = pos._node->_lnode;
             (pos._node->_lnode)->_parent = pos._node->_parent;
           }
-          else
-          {
+          else {
+            // exist right child
             (pos._node->_parent)->_lnode = pos._node->_rnode;
             (pos._node->_rnode)->_parent = pos._node->_parent;
           }
         }
-        else
-        {
-          if (pos._node->_lnode)
-          {
+        else {
+          // right child
+          if (pos._node->_lnode) {
+            //exist left child
             (pos._node->_parent)->_rnode = pos._node->_lnode;
             (pos._node->_lnode)->_parent = pos._node->_parent;
           }
-          else
-          {
+          else {
             (pos._node->_parent)->_rnode = pos._node->_rnode;
             (pos._node->_rnode)->_parent = pos._node->_parent;
           }
         }
         delete pos._node;
       }
-      else //no child
-      {
-        if ((pos._node->_parent)->_lnode == pos._node) (pos._node->_parent)->_lnode = 0;
+      else {
+        // no child
+        if (pos._node == (pos._node->_parent)->_lnode) (pos._node->_parent)->_lnode = 0;
         else (pos._node->_parent)->_rnode = 0;
         delete pos._node;
       }
+      return true; 
     }
-    return true;
   }
 
   bool erase(const T& x) //remove firstly encountered x; (find then erase iterator)
@@ -345,25 +334,19 @@ public:
   iterator find(const T& x)
   {
     BSTreeNode<T>* cur = _root;
-    while (cur->_data != x && cur && cur != _tail)
-    {
+    while (cur && cur->_data != x && cur != _tail) {
       if (x > cur->_data) cur = cur->_rnode;
       else cur = cur->_lnode;
     }
-    return ((cur->_data == x)? iterator(cur): end());
+    return (!cur || cur == _tail)? end(): iterator(cur);
   }
 
-  void clear() // delete all nodes except for the dummy node
-  {
-    while (!empty()) pop_front();
-  }
+  // delete all nodes except for the dummy node
+  void clear() { while (!empty()) pop_front(); }
 
   void sort() const {} //dummy command
 
-  void print() const //-v
-  {
-
-  }
+  void print() const { printv(_root, 0); }
 
 private:
   //data member
@@ -375,6 +358,17 @@ private:
     T temp = x->_data;
     x->_data = y->_data;
     y->_data = temp;
+  }
+
+  void printv(BSTreeNode<T>* r, size_t n) const
+  {
+    if (!r) return;
+    cout << string(n, ' ') << r->_data << endl;
+    n += 2;
+    if (r->_lnode) printv(r->_lnode, n);
+    else cout << string(n, ' ') << "[0]" << endl;
+    if (r->_rnode && r->_rnode != _tail) printv(r->_rnode, n);
+    else cout << string(n, ' ') << "[0]" << endl;
   }
   
 };
