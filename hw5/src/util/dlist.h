@@ -55,7 +55,7 @@ public:
     ~iterator() {} // Should NOT delete _node
 
     // TODO: implement these overloaded operators
-    const T& operator * () const { return *(this); }
+    const T& operator * () const { return _node->_data; }
     T& operator * () { return _node->_data; }
     iterator& operator ++ ()
     {
@@ -97,29 +97,25 @@ public:
   iterator begin() const { return iterator(_head->_next); }
   iterator end() const { return iterator(_head); }
   bool empty() const { return (_head->_next == _head); }
-  size_t size() const
-  {
+  size_t size() const {
     size_t n = 0;
     for (iterator it = begin(); it != end(); ++it) ++n;
     return n;
   }
 
-  void push_back(const T& x)
-  {
+  void push_back(const T& x) {
     DListNode<T>* add = new DListNode<T>(x, _head->_prev, _head);
     (_head->_prev)->_next = add;
     _head->_prev = add;
     _isSorted = false;
   }
-  void pop_front()
-  {
+  void pop_front() {
     DListNode<T>* first = _head->_next;
     _head->_next = first->_next;
     (first->_next)->_prev = _head;
     delete first;
   }
-  void pop_back()
-  {
+  void pop_back() {
     DListNode<T>* last = _head->_prev;
     _head->_prev = last->_prev;
     (last->_prev)->_next = _head;
@@ -127,31 +123,24 @@ public:
   }
 
   // return false if nothing to erase
-  bool erase(iterator pos)
-  {
+  bool erase(iterator pos) {
     if (empty()) return false;
     ((pos._node)->_prev)->_next = (pos._node)->_next;
     ((pos._node)->_next)->_prev = (pos._node)->_prev;
     delete pos._node;
     return true;
   }
-  bool erase(const T& x)
-  {
+  bool erase(const T& x) {
     iterator it = find(x);
     if (it == end()) return false;
-    else
-    {
+    else {
       erase(it);
       return true;
     }
   }
 
-  iterator find(const T& x)
-  {
-    for (iterator it = begin(); it != end(); ++it)
-    {
-      if (*it == x) return it;
-    }
+  iterator find(const T& x) {
+    for (iterator it = begin(); it != end(); ++it) { if (*it == x) return it; }
     return end();
   }
 
@@ -190,8 +179,7 @@ public:
   }
   */
 
-  void sort() const
-  {
+  void sort() const {
     if (!empty() && !_isSorted) quicksort(_head->_next, _head->_prev);
     _isSorted = true;
   }
@@ -202,8 +190,7 @@ private:
   mutable bool   _isSorted; // (optionally) to indicate the array is sorted
 
   // [OPTIONAL TODO] helper functions; called by public member functions
-  void swap(DListNode<T>*& x, DListNode<T>*& y) const
-  {
+  void swap(DListNode<T>*& x, DListNode<T>*& y) const {
     T temp = x->_data;
     x->_data = y->_data;
     y->_data = temp;

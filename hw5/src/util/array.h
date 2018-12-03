@@ -62,14 +62,12 @@ public:
     }
 
     iterator operator + (int i) const { return iterator(_node + i); }
-    iterator& operator += (int i)
-    {
+    iterator& operator += (int i) {
       _node += i;
       return (*this);
     }
 
-    iterator& operator = (const iterator& i)
-    {
+    iterator& operator = (const iterator& i) {
       _node = i._node;
       return (*this);
     }
@@ -90,8 +88,7 @@ public:
   T& operator [] (size_t i) { return _data[i]; }
   const T& operator [] (size_t i) const { return _data[i]; }
 
-  void push_back(const T& x)
-  {
+  void push_back(const T& x) {
     if (_size == _capacity)
     {
       if (_capacity == 0) _capacity = 1;
@@ -107,15 +104,12 @@ public:
     _data[_size++] = x;
     _isSorted = false;
   }
-  void pop_front()
-  {
-    if (!empty())
-    {
+  void pop_front() {
+    if (!empty()) {
     //remove first element
     //if _size>=2, then copy the last to the first
     //but _data pointer and _capacity remain unchanged
-      if (_size==1)
-      {
+      if (_size==1) {
         _data = 0;
         _size = 0;
       }
@@ -127,47 +121,33 @@ public:
     }
     _isSorted = false;
   }
-  void pop_back()
-  {
-    if (!empty())
-    {
-      _size -= 1;
-    }
-  }
+  void pop_back() { if (!empty()) { _size -= 1; } }
 
-  bool erase(iterator pos)
-  {
+  bool erase(iterator pos) {
     if (empty()) return false;
     --(_size);
     *pos = _data[_size];
     _isSorted = false;
     return true;
   }
-  bool erase(const T& x)
-  {
+  bool erase(const T& x) {
     iterator it = find(x);
     if (it == end()) return false;
-    else
-    {
+    else {
       erase(it);
       return true;
     }
   }
 
-  iterator find(const T& x)
-  {
-    for (iterator it = begin(); it != end(); ++it)
-    {
-      if (*it == x) return it;
-    }
+  iterator find(const T& x) {
+    for (iterator it = begin(); it != end(); ++it) { if (*it == x) return it; }
     return end();
   }
 
   void clear() { _size = 0; }
 
   // [Optional TODO] Feel free to change, but DO NOT change ::sort()
-  void sort() const
-  {
+  void sort() const {
     if (!empty() && !_isSorted) ::sort(_data, _data+_size);
     _isSorted = true;
   }

@@ -49,8 +49,7 @@ public:
   }
   ~BSTree() {clear(); delete _root;}
   // TODO: design your own class!!
-  class iterator
-  {
+  class iterator{
     friend class BSTree;
 
   public:
@@ -61,70 +60,47 @@ public:
     // TODO: implement these overloaded operators
     const T& operator * () const { return _node->_data; }
     T& operator * () { return _node->_data; }
-    iterator& operator ++ () //++b, find successor
-    {
+    iterator& operator ++ () {
       assert(_node->_lnode != _node);
-      /*
-      if (_node->_lnode == _node)
-      {
+      if (_node->_rnode) {
         _node = _node->_rnode;
+        if (_node->_lnode != _node) { while (_node->_lnode) _node = _node -> _lnode; }
         return (*this);
       }
-      */
-      if (_node->_rnode)
-      {
-        _node = _node->_rnode;
-        if (_node->_lnode != _node)
-        {
-          while (_node->_lnode) _node = _node -> _lnode;
-        }
-        return (*this);
-      }
-      else
-      {
+      else {
         while (_node->_parent && _node == (_node->_parent)->_rnode) _node = _node->_parent;
         _node = _node->_parent;
         return (*this);
       }
     }
-    iterator operator ++ (int) //b++
-    {
+    iterator operator ++ (int) {
       iterator temp = (*this);
       ++(*this);
       return temp;
     }
-    iterator& operator -- ()
-    {
-      if (_node->_lnode == _node)
-      {
+    iterator& operator -- () {
+      if (_node->_lnode == _node) {
         _node = _node->_parent;
         return (*this);
       }
-      else if (_node->_lnode)
-      {
+      else if (_node->_lnode) {
         _node = _node->_lnode;
-        if (_node->_lnode != _node)
-        {
-            while (_node->_rnode) _node = _node->_rnode;            
-        }
+        if (_node->_lnode != _node) { while (_node->_rnode) _node = _node->_rnode; }
         return (*this);
       }
-      else
-      {
+      else {
         while (_node->_parent && _node == (_node->_parent)->_lnode) _node = _node->_parent;
         _node = _node->_parent;
         return (*this);
       }
     }
-    iterator operator -- (int)
-    {
+    iterator operator -- (int) {
       iterator temp = (*this);
       --(*this);
       return temp;
     }
 
-    iterator& operator = (const iterator& i)
-    {
+    iterator& operator = (const iterator& i) {
       _node = i._node;
       return *(this);
     }
@@ -135,31 +111,25 @@ public:
     BSTreeNode<T>* _node;
 
   };
-  iterator begin() const //leftmost element, end() if empty()
-  {
-    return iterator(_tail->_rnode);
-  }
-  iterator end() const //handle it youself(but '--' bring back last element)
-  {
-    return iterator(_tail);
-  }
+  //leftmost element, end() if empty()
+  iterator begin() const { return iterator(_tail->_rnode); }
+  //handle it youself(but '--' bring back last element)
+  iterator end() const { return iterator(_tail); }
   bool empty() const { return (_root == _tail); }
-  size_t size() const
-  {
+  size_t size() const {
     size_t n = 0;
     for (iterator it = begin(); it != end(); ++it) ++n;
     return n;
   }
 
-  void insert(const T& x)
-  {
+  void insert(const T& x) {
     if (empty()) {
       _root = new BSTreeNode<T>(x, 0, _tail, 0);
       _tail->_rnode = _tail->_parent = _root;
     }
     else if (_root->_rnode->_rnode == _root) {
       // size == 1
-      if (x >= _root->_data) {
+      if (x > _root->_data) {
         BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, _tail, _root);
         _root->_rnode = b;
         _tail->_parent = b;
@@ -172,14 +142,14 @@ public:
     }
     else {
       // size != 1
-      BSTreeNode<T>* cur = _root, *prev = _root; //???
+      BSTreeNode<T>* cur = _root, *prev = cur;
       while (cur && cur->_lnode != cur) {
         prev = cur;
-        if (x >= cur->_data) cur = cur->_rnode;
+        if (x > cur->_data) cur = cur->_rnode;
         else cur = cur->_lnode;
       }
       if (!cur) {
-        if (_tail->_rnode == prev && x < prev->_data) {
+        if (_tail->_rnode == prev && x <= prev->_data) {
           // leftmost
           BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, 0, prev);
           prev->_lnode = b;
@@ -188,7 +158,7 @@ public:
         else {
           // normal
           BSTreeNode<T>* b = new BSTreeNode<T>(x, 0, 0, prev);
-          if (x >= prev->_data) prev->_rnode = b;
+          if (x > prev->_data) prev->_rnode = b;
           else prev->_lnode = b;
         }
       }
@@ -200,8 +170,8 @@ public:
       }
     }
   }
-  void pop_front() //remove left most node
-  {
+  //remove left most node
+  void pop_front() {
     if (empty()) return;
     else if (_root->_rnode->_rnode == _root) {
       // size == 1
@@ -235,8 +205,8 @@ public:
       }
     }
   }
-  void pop_back() //remove right most node
-  {
+  //remove right most node
+  void pop_back() {
     if (empty()) return;
     else if (_root->_rnode->_rnode == _root) {
       //size == 1
@@ -272,8 +242,7 @@ public:
   }
 
   // return false if nothing to erase
-  bool erase(iterator pos) //erase node at the pos
-  {
+  bool erase(iterator pos) {
     if (empty()) return false;
     else {
       if (pos == begin()) { pop_front(); return true; }
@@ -323,16 +292,15 @@ public:
     }
   }
 
-  bool erase(const T& x) //remove firstly encountered x; (find then erase iterator)
-  {
+  //remove firstly encountered x; (find then erase iterator)
+  bool erase(const T& x) {
     iterator it = find(x);
     if (it == end()) return false;
     erase(it);
     return true;
   }
 
-  iterator find(const T& x)
-  {
+  iterator find(const T& x) {
     BSTreeNode<T>* cur = _root;
     while (cur && cur->_data != x && cur != _tail) {
       if (x > cur->_data) cur = cur->_rnode;
@@ -353,15 +321,13 @@ private:
   BSTreeNode<T>* _root;
   BSTreeNode<T>* _tail;
 
-  void swap(BSTreeNode<T>*& x, BSTreeNode<T>*& y) const
-  {
+  void swap(BSTreeNode<T>*& x, BSTreeNode<T>*& y) const {
     T temp = x->_data;
     x->_data = y->_data;
     y->_data = temp;
   }
 
-  void printv(BSTreeNode<T>* r, size_t n) const
-  {
+  void printv(BSTreeNode<T>* r, size_t n) const {
     if (!r) return;
     cout << string(n, ' ') << r->_data << endl;
     n += 2;
