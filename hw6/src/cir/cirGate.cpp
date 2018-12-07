@@ -24,9 +24,20 @@ extern CirMgr *cirMgr;
 /**************************************/
 /*   class CirGate member functions   */
 /**************************************/
+//CIRGate <int gateId>
 void
 CirGate::reportGate() const
 {
+   cout << "==================================================" << endl;
+   string p = "";
+   if (_type == PI_GATE || _type == PO_GATE) {
+      p = getName();
+      if (p != "") p = "\"" + p + "\"";
+   }
+   string s = "= " + getTypeStr() + "(" + to_string(getId()) + ")" + p + 
+      ", line " + to_string(getLineNo());
+   cout << s << right << setw(49-s.size()) << "=" << endl;
+   cout << "==================================================" << endl;
 }
 
 void

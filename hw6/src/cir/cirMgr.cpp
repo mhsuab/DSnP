@@ -15,6 +15,7 @@
 #include "cirMgr.h"
 #include "cirGate.h"
 #include "util.h"
+//#include <fstream>
 
 using namespace std;
 
@@ -151,7 +152,27 @@ parseError(CirParseError err)
 bool
 CirMgr::readCircuit(const string& fileName)
 {
-   return true;
+   //handle parsing error message
+   if (false) return false;
+   else {
+      ifstream f(fileName);
+      if (!f.is_open()) {
+	 cerr << "Cannot open design \"" << fileName << "\"!!" << endl;
+	 return false;
+      }
+      string s, aag, M, I, L, O, A;
+      f >> aag >> M >> I >> L >> O >> A;
+      vector<string> content;
+      while (getline(f, s)) {
+	 if (s == "c") break;
+	 content.push_back(s);
+      }
+      f.close();
+      cout << M << I << L << O << A;
+      int line = 2;
+      for (size_t i = 0; i < int(I[0] - '0'); ++i) {}
+      return true;
+   }
 }
 
 /**********************************************************/

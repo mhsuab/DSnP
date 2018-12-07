@@ -43,6 +43,9 @@ public:
    void writeAag(ostream&) const;
 
 private:
+   vector<CirGate*> _piList;
+   vector<CirGate*> _poList;
+   vector<CirGate*> _totalList;
 };
 
 #endif // CIR_MGR_H
