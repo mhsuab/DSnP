@@ -46,6 +46,21 @@ private:
    vector<CirGate*> _piList;
    vector<CirGate*> _poList;
    vector<CirGate*> _totalList;
+   vector<CirGate*> _dfsList;
+   mutable int _m, _i, _l, _o, _a;
+
+   int s2i(const string& str) {
+       int n = 0;
+       for (size_t i = 0; i < str.size(); ++i) {
+	   n *= 10;
+	   n += int(str[i] - '0');
+       }
+       return n;
+   }
+
+   void linkAIG(const CirGate* aig);
+   void linkPO(const CirGate*);
+
 };
 
 #endif // CIR_MGR_H

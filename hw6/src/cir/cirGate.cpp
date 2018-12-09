@@ -34,9 +34,13 @@ CirGate::reportGate() const
       p = getName();
       if (p != "") p = "\"" + p + "\"";
    }
-   string s = "= " + getTypeStr() + "(" + to_string(getId()) + ")" + p + 
-      ", line " + to_string(getLineNo());
-   cout << s << right << setw(49-s.size()) << "=" << endl;
+   //string s = "= " + getTypeStr() + "(" + to_string(getId()) + ")" + p + ", line " + to_string(getLineNo());
+   //string s = "= " + p + getTypeStr() + to_string(getId()) + to_string(getLineNo());
+   string s = "= " + getTypeStr() + "(", k = to_string(getId()) + ")" + p + ", line " + to_string(getLineNo());
+   cout << s << k << right << setw(50-(s.size()+k.size())) << "=" << endl;
+   //char c[] = "=                                                =";
+
+   //cout << c << endl;
    cout << "==================================================" << endl;
 }
 
