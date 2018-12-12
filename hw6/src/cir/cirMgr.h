@@ -13,10 +13,12 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <map>
 
 using namespace std;
 
 #include "cirDef.h"
+#include "cirGate.h"
 
 extern CirMgr *cirMgr;
 
@@ -24,15 +26,21 @@ extern CirMgr *cirMgr;
 class CirMgr
 {
 public:
-   CirMgr(){}
-   ~CirMgr() {}
+   CirMgr():
+      _totalList{}, _dfsList{}, _AIGdfsList{}, _m(0), _i(0), _l(0), _o(0), _a(0) {}
+   ~CirMgr() {
+      for (GateList::const_iterator it = _totalList.begin(); it != _totalList.end(); ++it) {
+         delete (*it);
+      }
+   }
 
    // Access functions
    // return '0' if "gid" corresponds to an undefined gate.
-   CirGate* getGate(unsigned gid) const { return 0; }
+   CirGate* getGate(int gid) const;
 
-   // Member functions about circuit constructions
+   // Member functions about circuit construction
    bool readCircuit(const string&);
+   bool readError(const string&) const;
 
    // Member functions about circuit reporting
    void printSummary() const;
@@ -41,25 +49,18 @@ public:
    void printPOs() const;
    void printFloatGates() const;
    void writeAag(ostream&) const;
+   //static size_t GlobalRef;
 
 private:
-   vector<CirGate*> _piList;
-   vector<CirGate*> _poList;
-   vector<CirGate*> _totalList;
-   vector<CirGate*> _dfsList;
-   mutable int _m, _i, _l, _o, _a;
+   GateList _totalList;
+   map<int, CirGate*> _sortList;
+   mutable GateList _dfsList, _AIGdfsList;
+   int _m, _i, _l, _o, _a;
+   
+   void linkPO(CirGate*, int);
+   void linkAIG(CirGate*, int, int);
 
-   int s2i(const string& str) {
-       int n = 0;
-       for (size_t i = 0; i < str.size(); ++i) {
-	   n *= 10;
-	   n += int(str[i] - '0');
-       }
-       return n;
-   }
-
-   void linkAIG(const CirGate* aig);
-   void linkPO(const CirGate*);
+   void dfs() const;
 
 };
 

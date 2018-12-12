@@ -26,37 +26,33 @@ class CirGate
 {
 public:
    CirGate() {}
-   CirGate(GateType t = PI_GATE, size_t id = 0, size_t lineno = 0, string f = ""):
-       _type(t), _faninList({}), _sign({}), _fanoutList({}), _gateId(id), _lineNo(lineno), _name(""), _infile(f) {}
-   CirGate(GateType t = UNDEF_GATE, vector<CirGate*> fanin = {}, vector<bool> sign = {}, vector<CirGate*> fanout = {}, size_t id = 0, size_t lineno = 0, string n = "", string f = ""):
-       _type(t), _faninList(fanin), _sign(sign), _fanoutList(fanout), _gateId(id), _lineNo(lineno), _name(n), _infile(f) {}
-   ~CirGate() {}
+   CirGate(GateType t, int id, int line):
+      _type(t), _in{}, _out({}), _inSign{}, _gateId(id), _lineNo(line), _name(""), _mark(0) {}
+   virtual ~CirGate() {}
 
    // Basic access methods
    string getTypeStr() const {
+      string s;
       switch (_type) {
-	 case UNDEF_GATE:
-	    return "UNDEF";
-	    break;
-	 case PI_GATE:
-	    return "PI";
-	    break;
-	 case PO_GATE:
-	    return "PO";
-	    break;
-	 case AIG_GATE:
-	    return "AIG";
-	    break;
-	 case CONST_GATE:
-	    return "CONST";
-	    break;
-	 default: break;
+         case UNDEF_GATE:
+            s = "UNDEF"; break;
+         case PI_GATE:
+            s = "PI"; break;
+         case PO_GATE:
+            s = "PO"; break;
+         case AIG_GATE:
+            s = "AIG"; break;
+         case CONST_GATE:
+            s = "CONST"; break;
+         default: break;
       }
+      return s;
    }
-   size_t getLineNo() const { return _lineNo; }
-   size_t getId() const { return _gateId; }
+   int getLineNo() const { return _lineNo; }
+   int getId() const { return _gateId; }
    string getName() const { return _name; }
-   string getLine() const { return _infile; }
+   CirGate* getFanIn(int i) const { return _in[i]; }
+
 
    // Printing functions
    //virtual void printGate() const = 0;
@@ -64,19 +60,46 @@ public:
    void reportGate() const;
    void reportFanin(int level) const;
    void reportFanout(int level) const;
-   //void setFANIn(const CirGate* fanin, bool inv) const;
-   //void setFANOut(const CirGate* fanout) const;
+
+   void subFanIn(int, int, bool) const;
+   void subFanOut(int, int, const CirGate*) const;
+
+   void setIn(CirGate*, int, char);
+   void setOut(CirGate*);
+   void setName(string s) { _name = s; }
+
+   bool unDef() { return (_type == UNDEF_GATE); }
+   bool floating() {
+      if (_in[0]->unDef() || _in[1]->unDef()) return true;
+      return false;
+   }
+   bool unused() { return (_out.empty()); }
+   bool inv(int i) { return (_inSign[i] == '0' || _inSign[i] == '1'); }
+
+   //dfs
+   static size_t GlobalRef;
+   void dfsNet(GateList&, GateList&);
+   bool isGlobalRef() const { return (_mark == GlobalRef); }
+   void setToGlobalRef() const { _mark = GlobalRef; }
 
 private:
-   GateType		_type;
-   //GateFlag 		_flag;
-   vector<CirGate*> 	_faninList;
-   vector<bool> 	_sign;
-   vector<CirGate*> 	_fanoutList;
-   size_t 		_gateId;
-   size_t 		_lineNo;
-   string 		_name;
-   string 		_infile;
+   GateType          _type;
+   CirGate*          _in[2];
+   GateList          _out;
+   char              _inSign[2];
+   int               _gateId;
+   int               _lineNo;
+   string            _name;
+   mutable size_t    _mark;
+
+   void simplePrint(bool inv, bool visited, int step) const {
+      // inv true-> !
+      // visited true -> (*)
+      if (inv && visited) cout << string(2 * step, ' ') << "!" << getTypeStr() << " " << _gateId << " (*)" << endl;
+      else if (inv && !visited) cout << string(2 * step, ' ') << "!" << getTypeStr() << " " << _gateId << endl;
+      else if (!inv && visited) cout << string(2 * step, ' ') << getTypeStr() << " " << _gateId << " (*)" << endl;
+      else cout << string(2 * step, ' ') << getTypeStr() << " " << _gateId << endl;
+   }
 
 protected:
 

@@ -15,7 +15,7 @@
 #include "cirMgr.h"
 #include "cirGate.h"
 #include "util.h"
-//#include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -58,6 +58,8 @@ static char buf[1024];
 static string errMsg;
 static int errInt;
 static CirGate *errGate;
+
+size_t CirGate::GlobalRef = 1;
 
 static bool
 parseError(CirParseError err)
@@ -152,115 +154,174 @@ parseError(CirParseError err)
 bool
 CirMgr::readCircuit(const string& fileName)
 {
-   //handle parsing error message
-   if (false) return false;
+   //handle error case
+   if (readError(fileName)) { cirMgr = 0; return false; }
    else {
       ifstream f(fileName);
       if (!f.is_open()) {
-	 cerr << "Cannot open design \"" << fileName << "\"!!" << endl;
-	 return false;
+         cerr << "Cannot open design \"" << fileName << "\"!!" << endl;
+         return false;
       }
+      int line = 2, end = line, id, fanin1, fanin2;
       string s;
-      vector<string> content{""};
-      while (getline(f, s)) {
-	  //if (s == "c") break;
-	  if (s[0] == 'c') break;
-	  content.push_back(s);
-      }
-      f.close();
+      f >> s >> _m >> _i >> _l >> _o >> _a;
 
-      string agg, M, I, L, O, A, token;
-      int pos = myStrGetTok(content[1], agg), line = 2, end = line, token_i;
-      vector<int> idlist;
-      pos = myStrGetTok(content[1], M, pos);
-      pos = myStrGetTok(content[1], I, pos);
-      pos = myStrGetTok(content[1], L, pos);
-      pos = myStrGetTok(content[1], O, pos);
-      _m = int(M[0] - '0');
-      _i = int(I[0] - '0');
-      _l = int(L[0] - '0');
-      _o = int(O[0] - '0');
+      CirGate* current;
+      int fan[_o + _a * 2];
 
       //PI
       end += _i;
-      CirGate* current = new CirGate(CONST_GATE, 0, 0, "");
-      _totalList.push_back(current);
       for (; line < end; ++line) {
-	  myStrGetTok(content[line], token);
-	  token_i = s2i(token)/2;
-	  idlist.push_back(token_i);
-	  current = new CirGate(PI_GATE, token_i, line, content[line]);
-	  _piList.push_back(current);
-	  _totalList.push_back(current);
+         f >> id;
+         current = new CirGate(PI_GATE, id/2, line);
+         _totalList.push_back(current);
+         _sortList.insert(pair<int, CirGate*>(id/2, current));
       }
+
       //PO
-      /*
       end += _o;
-      //line = _i + 1
+      id = _m + 1;
       for (; line < end; ++line) {
-	  myStrGetTok(content[line], token);
-	  token_i = s2i(token_i);
-	  if (token_i%2) { po.push_back((-1) * token_i/2); }
-	  else { po.push_back(token_i/2); }
+         f >> fanin1;
+         current = new CirGate(PO_GATE, id, line);
+         _totalList.push_back(current);
+         _sortList.insert(pair<int, CirGate*>(id, current));
+         ++id;
+         fan[line - _i -2] = fanin1;
+      }
+
+      //AIG
+      end += _a;
+      for (; line < end; ++ line) {
+         f >> id >> fanin1 >> fanin2;
+         current = new CirGate(AIG_GATE, id/2, line);
+         _totalList.push_back(current);
+         _sortList.insert(pair<int, CirGate*>(id/2, current));
+         fan[(line-_i-_o-2)*2 + _o] = fanin1;
+         fan[(line-_i-_o-2)*2 + _o + 1] = fanin2;
+      }
+
+      //comment
+      while (f >> s && s != "c") {
+         id = 0;
+         for (size_t i = 1; i < s.size(); ++i) {
+            id *= 10;
+            id += int(s[i] - '0');
+         }
+         if (s[0] == 'i') {
+            f >> s;
+            _totalList[id]->setName(s);
+         }
+         else if (s[0] == 'o') {
+            f >> s;
+            _totalList[id + _i]->setName(s);
+         }
+      }
+
+      //CONST0
+      current = new CirGate(CONST_GATE, 0, 0);
+      _totalList.push_back(current);
+      _sortList.insert(pair<int, CirGate*>(0, current));
+
+      //linkPO
+      for (int i = _i; i < (_i + _o); ++i) {
+         linkPO(_totalList[i], fan[i - _i]);
+      }
+
+      //linkAIG
+      for (int i = (_i + _o); i < (_i + _o + _a); ++i) {
+         linkAIG(_totalList[i], fan[(i-_i-_o)*2 + _o], fan[(i-_i-_o)*2 + _o + 1]);
+      }
+
+      f.close();
+
+      /*
+      for (vector<CirGate*>::iterator it = _totalList.begin(); it != _totalList.end(); ++it) {
+         //(*it)->reportGate();
+         (*it)->printGate();
+      }
+
+      for (int i = 0; i < (_o + _a * 2); ++i) {
+         cout << fan[i] << endl;
       }
       */
-      line += _o;
-      //AIG
-      vector<CirGate*> aigList;
-      for (; line < content.size(); ++line) {
-	  myStrGetTok(content[line], token);
-	  token_i = s2i(token)/2;
-	  idlist.push_back(token_i);
-	  current = new CirGate(AIG_GATE, token_i, line, content[line]);
-	  _totalList.push_back(current);
-	  aigList.push_back(current);
-      }
-
-      int isMax = 0;
-      for (vector<int>::iterator it = idlist.begin(); it != idlist.end(); ++it) {
-	  if (*it >= isMax) isMax = (*it) + 1;
-      }
-      line = _i + 2;
-      end = line + _o;
-      for (; line < end; ++line) {
-	  current = new CirGate(PO_GATE, isMax, line, content[line]);
-	  ++isMax;
-	  _totalList.push_back(current);
-	  _poList.push_back(current);
-      }
-
-      //for (vector<CirGate*>::iterator it = aigList.begin(); it != aigList.end(); ++it) { linkAIG(*it); }
-      //for (vector<CirGate*>::iterator it = _poList.begin(); it != _poList.end(); ++it) { linkPO(*it); }
-
-      vector<string>().swap(content);
-      vector<int>().swap(idlist);
-      vector<CirGate*>().swap(aigList);
-      delete current;
-
-      //checking
-      for (vector<CirGate*>::iterator it = _totalList.begin(); it != _totalList.end(); ++it) { (*it)->reportGate(); }
 
       return true;
    }
 }
-/*
-void
-CirMgr::linkAIG(const CirGate* aig)
+
+CirGate*
+CirMgr::getGate(int gid) const
 {
-    string gate, fanin1, fanin2;
-    int pos = myStrGetTok(aig->getLine(), gate), tmp;
-    const CirGate* add;
-    pos = myStrGetTok(aig->getLine(), fanin1, pos);
-    pos = myStrGetTok(aig->getLine(), fanin2, pos);
-    tmp = s2i(fanin1);
-    add = getGate(tmp/2);
-    (tmp%2)? (aig->setFANIn(add, false)):(aig->setFANIn(add, true));
-    add->setFANOut(aig);
-    tmp = s2i(fanin2);
-    add = getGate(tmp/2);
-    (tmp%2)? (aig->setFANIn(add, false)):(aig->setFANIn(add, true));
-    add->setFANOut(aig);
-}*/
+   /*
+   for (vector<CirGate*>::const_iterator it = _totalList.begin(); it != _totalList.end(); ++it) {
+      if ((*it)->getId() == gid) return (*it);
+   }
+   */
+   map<int, CirGate*>::const_iterator it = _sortList.find(gid);
+   if (it == _sortList.end()) return 0;
+   return (it)->second;
+}
+
+void
+CirMgr::linkPO(CirGate* po, int fanin)
+{
+   CirGate* add = getGate(fanin/2);
+   int undef = 0;
+   if (add == 0) {
+      add = new CirGate(UNDEF_GATE, fanin/2, 0);
+      _totalList.push_back(add);
+      _sortList.insert(pair<int, CirGate*>(fanin/2, add));
+      undef = 1;
+   }
+   if (fanin%2 == 0) po->setIn(add, 0, (2 + undef) + '0');
+   else po->setIn(add, 0, (0 + undef) + '0');
+   add->setOut(po);
+}
+
+void
+CirMgr::linkAIG(CirGate* aig, int fanin1, int fanin2)
+{
+   CirGate* add = getGate(fanin1/2);
+   int undef = 0;
+   if (add == 0) {
+      add = new CirGate(UNDEF_GATE, fanin1/2, 0);
+      _totalList.push_back(add);
+      _sortList.insert(pair<int, CirGate*>(fanin1/2, add));
+      undef = 1;
+   }
+   if (fanin1%2 == 0) aig->setIn(add, 0, (2 + undef) + '0');
+   else aig->setIn(add, 0, (0 + undef) + '0');
+   add->setOut(aig);
+
+   undef = 0;
+   add = getGate(fanin2/2);
+   if (add == 0) {
+      add = new CirGate(UNDEF_GATE, fanin2/2, 0);
+      _totalList.push_back(add);
+      _sortList.insert(pair<int, CirGate*>(fanin2/2, add));
+      undef = 1;
+   }
+   if (fanin2%2 == 0) aig->setIn(add, 1, (2 + undef) + '0');
+   else aig->setIn(add, 1, (0 + undef) + '0');
+   add->setOut(aig);
+}
+
+bool
+CirMgr::readError(const string& fileName) const
+{
+   /*
+   ifstream f(fileName);
+   string s, sub;
+   while (getline(f, s)) {
+      if (s == "c") break;
+      ++lineNo;
+      colNo = 0;
+   }
+   f.close();
+   */
+   return false;
+}
 
 /**********************************************************/
 /*   class CirMgr member functions for circuit printing   */
@@ -277,17 +338,41 @@ Circuit Statistics
 void
 CirMgr::printSummary() const
 {
+   cout << "\nCircuit Statistics\n==================" << endl;
+   cout << "  PI" << right << setw(12) << _i << endl;
+   cout << "  PO" << right << setw(12) << _o << endl;
+   cout << "  AIG" << right << setw(11) << _a << endl;
+   cout << "------------------" << endl;
+   cout << "  Total" << right << setw(9) << (_i + _o + _a) << endl;
 }
 
 void
 CirMgr::printNetlist() const
 {
+   cout << endl;
+   ++CirGate::GlobalRef;
+
+   dfs();
+
+   for (size_t i = 0; i < _dfsList.size(); ++i) {
+      cout << "[" << i << "] ";
+      _dfsList[i]->printGate();
+   }
+}
+
+void
+CirMgr::dfs() const
+{
+   if (_dfsList.empty()) {
+      for (int i = _i; i < (_i + _o); ++i) { _totalList[i]->dfsNet(_dfsList, _AIGdfsList); }
+   }
 }
 
 void
 CirMgr::printPIs() const
 {
    cout << "PIs of the circuit:";
+   for (int i = 0; i < _i; ++i) { cout << " " << (_totalList[i])->getId(); }
    cout << endl;
 }
 
@@ -295,15 +380,84 @@ void
 CirMgr::printPOs() const
 {
    cout << "POs of the circuit:";
+   for (int i = _i; i < (_i + _o); ++i) { cout << " " << (_totalList[i])->getId(); }
    cout << endl;
 }
 
 void
 CirMgr::printFloatGates() const
 {
+   //find floating fanins
+   if (_totalList.back()->unDef()) {
+      vector<int> floatingIn;
+      for (int i = _i; i < (_i+_o+_a); ++i) {
+         if (_totalList[i]->floating()) floatingIn.push_back(_totalList[i]->getId());
+      }
+      cout << "Gates with floating fanin(s):";
+      sort(floatingIn.begin(), floatingIn.end());
+      for (vector<int>::iterator it = floatingIn.begin(); it != floatingIn.end(); ++it) {
+         cout << " " << (*it);
+      }
+      cout << endl;
+   }
+
+   //find unused gate
+   vector<int> unusedGate;
+   for (int i = 0; i < _i; ++i) {
+      if (_totalList[i]->unused()) unusedGate.push_back(_totalList[i]->getId());
+   }
+   for (int i = (_i + _o); i < (_i + _o + _a); ++i) {
+      if (_totalList[i]->unused()) unusedGate.push_back(_totalList[i]->getId());
+   }
+   if (!unusedGate.empty()) {
+      cout << "Gates defined but not used  :";
+      sort(unusedGate.begin(), unusedGate.end());
+      for (vector<int>::iterator it = unusedGate.begin(); it != unusedGate.end(); ++it) {
+         cout << " " << (*it);
+      }
+      cout << endl;
+   }
 }
 
 void
 CirMgr::writeAag(ostream& outfile) const
 {
+   if (_AIGdfsList.empty()) dfs();
+   outfile << "aag " << _m << " " << _i << " " << _l << " " << _o << " " << _AIGdfsList.size() << endl;
+
+   //PI
+   for (int i = 0; i < _i; ++i) {
+      outfile << (_totalList[i]->getId()) * 2 << endl;
+   }
+
+   //PO
+   for (int i = _i;i < (_i + _o); ++i) {
+      if (_totalList[i]->inv(0)) outfile << ((_totalList[i]->getFanIn(0))->getId()) * 2 + 1 << endl;
+      else outfile << ((_totalList[i]->getFanIn(0))->getId() * 2) << endl;
+   }
+
+   //AIG
+   for (GateList::const_iterator it = _AIGdfsList.begin(); it != _AIGdfsList.end(); ++it) {
+      outfile << (*it)->getId() * 2;
+      for (int i = 0; i < 2; ++i) {
+	 if ((*it)->inv(i)) outfile << " " << (((*it)->getFanIn(i))->getId()) * 2 + 1;
+	 else outfile << " " << (((*it)->getFanIn(i))->getId()) * 2;
+      }
+      outfile << endl;
+   }
+
+   //_name
+   for (int i = 0; i < _i; ++i) {
+      if (_totalList[i]->getName() != "") {
+	 outfile << "i" << i << " " << _totalList[i]->getName() << endl;
+      }
+   }
+
+   for (int i = _i; i < (_i + _o); ++i) {
+      if (_totalList[i]->getName() != "") {
+	 outfile << "o" << (i - _i) << " " << _totalList[i]->getName() << endl;
+      }
+   }
+   outfile << 'c' << endl;
+   outfile << "DONE..." << endl;
 }
