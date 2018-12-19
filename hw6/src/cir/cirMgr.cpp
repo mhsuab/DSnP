@@ -34,6 +34,8 @@ enum CirParseError {
    ILLEGAL_IDENTIFIER,
    ILLEGAL_SYMBOL_TYPE,
    ILLEGAL_SYMBOL_NAME,
+   ILLEGAL_NEWLINE,
+   ILLEGAL_LATCHES,
    MISSING_NUM,
    MISSING_IDENTIFIER,
    MISSING_NEWLINE,
@@ -52,7 +54,8 @@ enum CirParseError {
 /**************************************/
 /*   Static varaibles and functions   */
 /**************************************/
-static unsigned lineNo = 0;  // in printint, lineNo needs to ++
+//static unsigned lineNo = 0;  // in printint, lineNo needs to ++
+static int lineNo = 0;
 static unsigned colNo  = 0;  // in printing, colNo needs to ++
 static char buf[1024];
 static string errMsg;
@@ -62,7 +65,7 @@ static CirGate *errGate;
 size_t CirGate::GlobalRef = 1;
 
 static bool
-parseError(CirParseError err)
+parseError(CirParseError err = DUMMY_END)
 {
    switch (err) {
       case EXTRA_SPACE:
@@ -94,6 +97,14 @@ parseError(CirParseError err)
          cerr << "[ERROR] Line " << lineNo+1 << ", Col " << colNo+1
               << ": Symbolic name contains un-printable char(" << errInt
               << ")!!" << endl;
+         break;
+      case ILLEGAL_NEWLINE:
+         cerr << "[ERROR] Line " << lineNo+1 << ", Col " << colNo+1
+              << ": Exist Unexpexted newline!!" << endl;
+         break;
+      case ILLEGAL_LATCHES:
+         cerr << "[ERROR] Line " << lineNo+1
+              << ": Illegal latches!!" << endl;
          break;
       case MISSING_NUM:
          cerr << "[ERROR] Line " << lineNo+1 << ", Col " << colNo+1
@@ -143,8 +154,12 @@ parseError(CirParseError err)
          cerr << "[ERROR] Line " << lineNo+1 << ": " << errMsg
               << " is too big (" << errInt << ")!!" << endl;
          break;
-      default: break;
+      default:
+         cerr << "[ERROR] Line " << lineNo+1 << ", Col " << colNo+1 << endl;
+         break;
    }
+   lineNo = 0;
+   colNo = 0;
    return false;
 }
 
@@ -154,100 +169,492 @@ parseError(CirParseError err)
 bool
 CirMgr::readCircuit(const string& fileName)
 {
-   //handle error case
-   if (readError(fileName)) { cirMgr = 0; return false; }
-   else {
-      ifstream f(fileName);
-      if (!f.is_open()) {
-         cerr << "Cannot open design \"" << fileName << "\"!!" << endl;
+   //for error parsing
+   char c, prev;
+   int seq_pos, count_space = 0;
+
+   ifstream f(fileName);
+   if (!f.is_open()) {
+      cerr << "Cannot open design \"" << fileName << "\"!!" << endl;
+      return false;
+   }
+   int end, id, fanin1, fanin2;
+   string s;
+
+   seq_pos = f.tellg();
+   while (true) {
+      f.get(c);
+      switch (colNo) {
+         case 0:
+            if (c == ' ') {
+               parseError(EXTRA_SPACE);
+               return false;
+            }
+            else if (c == '\n') {
+               errMsg = "aag";
+               parseError(MISSING_IDENTIFIER);
+               return false;
+            }
+            else if (iscntrl(c)) {
+               errInt = (int)c;
+               parseError(ILLEGAL_WSPACE);
+               return false;
+            }
+            else if (c != 'a') {
+               f.seekg(seq_pos);
+               f >> errMsg;
+               parseError(ILLEGAL_IDENTIFIER);
+               return false;
+            }
+            break;
+         case 1:
+            if (c != 'a') {
+               f.seekg(seq_pos);
+               f >> errMsg;
+               parseError(ILLEGAL_IDENTIFIER);
+               return false;
+            }
+            break;
+         case 2:
+            if (c != 'g') {
+               f.seekg(seq_pos);
+               f >> errMsg;
+               parseError(ILLEGAL_IDENTIFIER);
+               return false;
+            }
+            break;
+         case 3:
+            if (c != ' ') {
+               f.seekg(seq_pos);
+               f >> errMsg;
+               parseError(ILLEGAL_IDENTIFIER);
+               return false;
+            }
+            else if (isdigit(c)) {
+               f.seekg(seq_pos);
+               f >> errMsg;
+               parseError(ILLEGAL_IDENTIFIER);
+               return false;
+            }
+            ++count_space;
+            break;
+         default:
+            //numbers
+            if (isdigit(c)) {}
+            else if (c == ' ') {
+               if (prev == ' ') {
+                  parseError(EXTRA_SPACE);
+                  return false;
+               }
+               else if (isdigit(prev) && count_space == 5) {
+                  parseError(MISSING_NEWLINE);
+                  return false;
+               }
+               ++count_space;
+            }
+            else if (c == '\n') {
+               if (isdigit(prev) && count_space == 5) break;
+               else {
+                  parseError(ILLEGAL_NEWLINE);
+                  return false;
+               }
+            }
+            else if (iscntrl(c)) {
+               errInt = (int) c;
+               parseError(ILLEGAL_WSPACE);
+               return false;
+            }
+            else {
+               //usual character
+               errMsg = c;
+               parseError(ILLEGAL_NUM);
+               return false;
+            }
+            break;
+      }
+      if (c == '\n') break;
+      ++colNo;
+      prev = c;
+   }
+   f.seekg(seq_pos);
+   colNo = 0;
+
+   f >> s >> _m >> _i >> _l >> _o >> _a;
+   if (_m < (_i + _l + _a)) {
+      errMsg = "Number of variables";
+      errInt = _m;
+      parseError(NUM_TOO_SMALL);
+      return false;
+   }
+   else if (_l != 0) {
+      parseError(ILLEGAL_LATCHES);
+      return false;
+   }
+   ++lineNo;
+
+   CirGate* current;
+   int fan[_o + _a * 2];
+
+
+   //PI
+   end = lineNo + _i;
+   for (; lineNo < end; ++lineNo) {
+      if (f.peek() == '\n') f.get(c);
+      seq_pos = f.tellg();
+      while (true) {
+         f.get(c);
+         if (colNo == 0 && !isdigit(c)) {
+            if (c == '\n') {
+               parseError(ILLEGAL_NUM);
+               return false;
+            }
+            else if (c == ' ') {
+               parseError(EXTRA_SPACE);
+               return false;
+            }
+            else if (!iscntrl(c)) {
+               errMsg = c;
+               parseError(ILLEGAL_NUM);
+               return false;
+            }
+            errInt = (int) c;
+            parseError(ILLEGAL_WSPACE);
+            return false;
+         }
+         else if (c == '\n') break;
+         else if (!isdigit(c)) {
+            errInt = (int) c;
+            parseError(ILLEGAL_WSPACE);
+            return false;
+         }
+         ++colNo;
+      }
+      f.seekg(seq_pos);
+      colNo = 0;
+      f >> id;
+      if (id % 2 == 1) {
+         errMsg = "PI";
+         errInt = id;
+         parseError(CANNOT_INVERTED);
          return false;
       }
-      int line = 2, end = line, id, fanin1, fanin2;
-      string s;
-      f >> s >> _m >> _i >> _l >> _o >> _a;
-
-      CirGate* current;
-      int fan[_o + _a * 2];
-
-      //PI
-      end += _i;
-      for (; line < end; ++line) {
-         f >> id;
-         current = new CirGate(PI_GATE, id/2, line);
-         _totalList.push_back(current);
-         _sortList.insert(pair<int, CirGate*>(id/2, current));
+      else if (id/2 > _m) {
+         errInt = id/2;
+         parseError(MAX_LIT_ID);
+         return false;
       }
-
-      //PO
-      end += _o;
-      id = _m + 1;
-      for (; line < end; ++line) {
-         f >> fanin1;
-         current = new CirGate(PO_GATE, id, line);
-         _totalList.push_back(current);
-         _sortList.insert(pair<int, CirGate*>(id, current));
-         ++id;
-         fan[line - _i -2] = fanin1;
+      else if (id/2 == 0) {
+         errInt = id/2;
+         parseError(REDEF_CONST);
+         return false;
       }
-
-      //AIG
-      end += _a;
-      for (; line < end; ++ line) {
-         f >> id >> fanin1 >> fanin2;
-         current = new CirGate(AIG_GATE, id/2, line);
-         _totalList.push_back(current);
-         _sortList.insert(pair<int, CirGate*>(id/2, current));
-         fan[(line-_i-_o-2)*2 + _o] = fanin1;
-         fan[(line-_i-_o-2)*2 + _o + 1] = fanin2;
+      else if (_sortList.find(id/2) != _sortList.end()) {
+         errInt = id;
+         errGate = _sortList.find(id/2)->second;
+         parseError(REDEF_GATE);
+         return false;
       }
-
-      //comment
-      while (f >> s && s != "c") {
-         id = 0;
-         for (size_t i = 1; i < s.size(); ++i) {
-            id *= 10;
-            id += int(s[i] - '0');
-         }
-         if (s[0] == 'i') {
-            f >> s;
-            _totalList[id]->setName(s);
-         }
-         else if (s[0] == 'o') {
-            f >> s;
-            _totalList[id + _i]->setName(s);
-         }
-      }
-
-      //CONST0
-      current = new CirGate(CONST_GATE, 0, 0);
+      current = new CirGate(PI_GATE, id/2, lineNo + 1);
       _totalList.push_back(current);
-      _sortList.insert(pair<int, CirGate*>(0, current));
+      _sortList.insert(pair<int, CirGate*>(id/2, current));
+   }
 
-      //linkPO
-      for (int i = _i; i < (_i + _o); ++i) {
-         linkPO(_totalList[i], fan[i - _i]);
+
+   //PO
+   end += _o;
+   id = _m + 1;
+   for (; lineNo < end; ++lineNo) {
+      if (f.peek() == '\n') f.get(c);
+      seq_pos = f.tellg();
+      while (true) {
+         f.get(c);
+         if (colNo == 0 && !isdigit(c)) {
+            if (c == '\n') {
+               parseError(ILLEGAL_NEWLINE);
+               return false;
+            }
+            else if (c == ' ') {
+               parseError(EXTRA_SPACE);
+               return false;
+            }
+            else if (!iscntrl(c)) {
+               errMsg = c;
+               parseError(ILLEGAL_NUM);
+               return false;
+            }
+            errInt = (int) c;
+            parseError(ILLEGAL_WSPACE);
+            return false;
+         }
+         else if (c == '\n') break;
+         else if (!isdigit(c)) {
+            errMsg = c;
+            parseError(ILLEGAL_NUM);
+            return false;
+         }
+         ++colNo;
       }
+      f.seekg(seq_pos);
+      colNo = 0;
+      f >> fanin1;
+      current = new CirGate(PO_GATE, id, lineNo + 1);
+      _totalList.push_back(current);
+      _sortList.insert(pair<int, CirGate*>(id, current));
+      ++id;
+      fan[lineNo - _i - 1] = fanin1;
+   }
 
-      //linkAIG
-      for (int i = (_i + _o); i < (_i + _o + _a); ++i) {
-         linkAIG(_totalList[i], fan[(i-_i-_o)*2 + _o], fan[(i-_i-_o)*2 + _o + 1]);
+
+   //AIG
+   end += _a;
+   for (; lineNo < end; ++ lineNo) {
+      if (f.peek() == '\n') f.get(c);
+      seq_pos = f.tellg();
+      count_space = 0;
+      while (true) {
+         f.get(c);
+         if (colNo == 0 && !isdigit(c)) {
+            if (c == '\n') {
+               parseError(ILLEGAL_NEWLINE);
+               return false;
+            }
+            else if (c == ' ') {
+               parseError(EXTRA_SPACE);
+               return false;
+            }
+            else if (!iscntrl(c)) {
+               errMsg = c;
+               parseError(ILLEGAL_NUM);
+               return false;
+            }
+            errInt = (int) c;
+            parseError(ILLEGAL_WSPACE);
+            return false;
+         }
+         else if (c == ' ') {
+            if (prev == ' ') {
+               parseError(EXTRA_SPACE);
+               return false;
+            }
+            else if (count_space == 2) {
+               parseError(EXTRA_SPACE);
+               return false;
+            }
+            ++count_space;
+         }
+         else if (c == '\n') {
+            if (count_space == 2) break;
+            else {
+               parseError(ILLEGAL_NEWLINE);
+               return false;
+            }
+         }
+         else if (!isdigit(c)) {
+            errMsg = c;
+            parseError(ILLEGAL_NUM);
+            return false;
+         }
+         prev = c;
+         ++colNo;
       }
+      f.seekg(seq_pos);
+      colNo = 0;
+      f >> id >> fanin1 >> fanin2;
+      if (id % 2 == 1) {
+         errMsg = "AIG";
+         errInt = id;
+         parseError(CANNOT_INVERTED);
+         return false;
+      }
+      else if (id/2 > _m) {
+         errInt = id/2;
+         parseError(MAX_LIT_ID);
+         return false;
+      }
+      else if (id/2 == 0) {
+         errInt = id/2;
+         parseError(REDEF_CONST);
+         return false;
+      }
+      else if (_sortList.find(id/2) != _sortList.end()) {
+         errInt = id;
+         errGate = _sortList.find(id/2)->second;
+         parseError(REDEF_GATE);
+         return false;
+      }
+      current = new CirGate(AIG_GATE, id/2, lineNo + 1);
+      _totalList.push_back(current);
+      _sortList.insert(pair<int, CirGate*>(id/2, current));
+      fan[(lineNo-_i-_o-1)*2 + _o] = fanin1;
+      fan[(lineNo-_i-_o-1)*2 + _o + 1] = fanin2;
+   }
 
-      f.close();
 
+   //comment
+   seq_pos = f.tellg();
+   count_space = 0;
+   int line = lineNo;
+   f.ignore();
+   while (f.peek() != EOF) {
+      f.get(c);
+      if (colNo == 0 && c == 'c') {
+         if (f.peek() == '\n' || f.peek() == EOF) break;
+         else {
+            parseError(MISSING_NEWLINE);
+            return false;
+         }
+      }
+      else if (colNo == 0 && c != 'i' && c != 'o') {
+         if (c == ' ') {
+            parseError(EXTRA_SPACE);
+            return false;
+         }
+         else if (c == '\n') {
+            parseError(ILLEGAL_NEWLINE);
+            return false;
+         }
+         else if (iscntrl(c)) {
+            errInt = (int) c;
+            parseError(ILLEGAL_WSPACE);
+            return false;
+         }
+         errMsg = c;
+         parseError(ILLEGAL_SYMBOL_TYPE);
+         return false;
+      }
+      else if (colNo == 1 && !isdigit(c)) {
+         if (c == '\n') {
+            parseError(ILLEGAL_NEWLINE);
+            return false;
+         }
+         else if (c == ' ') {
+            parseError(EXTRA_SPACE);
+            return false;
+         }
+         else if (!iscntrl(c)) {
+            errMsg = c;
+            parseError(ILLEGAL_NUM);
+            return false;
+         }
+         errInt = (int) c;
+         parseError(ILLEGAL_WSPACE);
+         return false;
+      }
+      else if (c == ' ') {
+         ++count_space;
+      }
       /*
-      for (vector<CirGate*>::iterator it = _totalList.begin(); it != _totalList.end(); ++it) {
-         //(*it)->reportGate();
-         (*it)->printGate();
-      }
-
-      for (int i = 0; i < (_o + _a * 2); ++i) {
-         cout << fan[i] << endl;
+      else if (c == ' ') {
+         if (prev == ' ') {
+            parseError(EXTRA_SPACE);
+            return false;
+         }
+         else if (count_space == 1) {
+            parseError(EXTRA_SPACE);
+            return false;
+         }
+         ++count_space;
       }
       */
-
-      return true;
+      else if (c == '\n') {
+         if ((count_space >= 2) || (count_space == 1 && prev != ' ')) {
+            colNo = -1;
+            count_space = 0;
+            ++lineNo;
+         }
+         else if (count_space == 0) {
+            parseError(ILLEGAL_NEWLINE);
+            return false;
+         }
+         else {
+            parseError(ILLEGAL_NEWLINE);
+            return false;
+         }
+      }
+      else if (iscntrl(c)) {
+         errInt = (int) c;
+         parseError(ILLEGAL_WSPACE);
+         return false;
+      }
+      prev = c;
+      ++colNo;
    }
+   colNo = 0;
+   lineNo = line;
+   f.seekg(seq_pos);
+
+   while (f >> s && s != "c") {
+      id = 0;
+      for (size_t i = 1; i < s.size(); ++i) {
+         id *= 10;
+         id += int(s[i] - '0');
+      }
+      if (s[0] == 'i') {
+         if (id > (_i - 1)) {
+            errMsg = "PI";
+            errInt = id;
+            parseError(NUM_TOO_BIG);
+            return false;
+         }
+         f >> s;
+         if (_totalList[id]->getName() != "") {
+            errMsg = "i";
+            errInt = id;
+            parseError(REDEF_SYMBOLIC_NAME);
+            return false;
+         }
+         _totalList[id]->setName(s);
+      }
+      else if (s[0] == 'o') {
+         if (id > (_o - 1)) {
+            errMsg = "PO";
+            errInt = id;
+            parseError(NUM_TOO_BIG);
+            return false;
+         }
+         f >> s;
+         if (_totalList[id + _i]->getName() != "") {
+            errMsg = "o";
+            errInt = id;
+            parseError(REDEF_SYMBOLIC_NAME);
+            return false;
+         }
+         _totalList[id + _i]->setName(s);
+      }
+      ++lineNo;
+   }
+
+   //CONST0
+   current = new CirGate(CONST_GATE, 0, 0);
+   _totalList.push_back(current);
+   _sortList.insert(pair<int, CirGate*>(0, current));
+
+   //linkPO
+   for (int i = _i; i < (_i + _o); ++i) {
+      linkPO(_totalList[i], fan[i - _i]);
+   }
+
+   //linkAIG
+   for (int i = (_i + _o); i < (_i + _o + _a); ++i) {
+      linkAIG(_totalList[i], fan[(i-_i-_o)*2 + _o], fan[(i-_i-_o)*2 + _o + 1]);
+   }
+
+   f.close();
+
+   /*
+   for (vector<CirGate*>::iterator it = _totalList.begin(); it != _totalList.end(); ++it) {
+      (*it)->reportGate();
+      //(*it)->printGate();
+   }
+   for (int i = 0; i < (_o + _a * 2); ++i) {
+      cout << fan[i] << endl;
+   }
+   */
+
+   lineNo = 0;
+   colNo  = 0;
+
+   return true;
 }
 
 CirGate*
@@ -274,6 +681,7 @@ CirMgr::linkPO(CirGate* po, int fanin)
       _sortList.insert(pair<int, CirGate*>(fanin/2, add));
       undef = 1;
    }
+   if (add->unDef()) undef = 1;
    if (fanin%2 == 0) po->setIn(add, 0, (2 + undef) + '0');
    else po->setIn(add, 0, (0 + undef) + '0');
    add->setOut(po);
@@ -290,6 +698,7 @@ CirMgr::linkAIG(CirGate* aig, int fanin1, int fanin2)
       _sortList.insert(pair<int, CirGate*>(fanin1/2, add));
       undef = 1;
    }
+   if (add->unDef()) undef = 1;
    if (fanin1%2 == 0) aig->setIn(add, 0, (2 + undef) + '0');
    else aig->setIn(add, 0, (0 + undef) + '0');
    add->setOut(aig);
@@ -302,25 +711,10 @@ CirMgr::linkAIG(CirGate* aig, int fanin1, int fanin2)
       _sortList.insert(pair<int, CirGate*>(fanin2/2, add));
       undef = 1;
    }
+   if (add->unDef()) undef = 1;
    if (fanin2%2 == 0) aig->setIn(add, 1, (2 + undef) + '0');
    else aig->setIn(add, 1, (0 + undef) + '0');
    add->setOut(aig);
-}
-
-bool
-CirMgr::readError(const string& fileName) const
-{
-   /*
-   ifstream f(fileName);
-   string s, sub;
-   while (getline(f, s)) {
-      if (s == "c") break;
-      ++lineNo;
-      colNo = 0;
-   }
-   f.close();
-   */
-   return false;
 }
 
 /**********************************************************/
@@ -440,8 +834,8 @@ CirMgr::writeAag(ostream& outfile) const
    for (GateList::const_iterator it = _AIGdfsList.begin(); it != _AIGdfsList.end(); ++it) {
       outfile << (*it)->getId() * 2;
       for (int i = 0; i < 2; ++i) {
-	 if ((*it)->inv(i)) outfile << " " << (((*it)->getFanIn(i))->getId()) * 2 + 1;
-	 else outfile << " " << (((*it)->getFanIn(i))->getId()) * 2;
+         if ((*it)->inv(i)) outfile << " " << (((*it)->getFanIn(i))->getId()) * 2 + 1;
+         else outfile << " " << (((*it)->getFanIn(i))->getId()) * 2;
       }
       outfile << endl;
    }
@@ -449,7 +843,7 @@ CirMgr::writeAag(ostream& outfile) const
    //_name
    for (int i = 0; i < _i; ++i) {
       if (_totalList[i]->getName() != "") {
-	 outfile << "i" << i << " " << _totalList[i]->getName() << endl;
+         outfile << "i" << i << " " << _totalList[i]->getName() << endl;
       }
    }
 

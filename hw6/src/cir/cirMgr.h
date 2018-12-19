@@ -40,7 +40,6 @@ public:
 
    // Member functions about circuit construction
    bool readCircuit(const string&);
-   bool readError(const string&) const;
 
    // Member functions about circuit reporting
    void printSummary() const;

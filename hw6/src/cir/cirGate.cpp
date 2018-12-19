@@ -120,7 +120,7 @@ CirGate::reportFanin(int level) const
 {
    assert (level >= 0);
    ++GlobalRef;
-   subFanIn(level, 0, 1);
+   subFanIn(level, 0, 0);
 }
 
 void
@@ -130,11 +130,11 @@ CirGate::subFanIn(int level, int step, bool inv) const
    else if (isGlobalRef()) simplePrint(inv, 1, step);
    else {
       simplePrint(inv, 0, step);
+      if (_inSign[0]) {
       setToGlobalRef();
       --level; ++step;
-      if (_inSign[0]) {
-	 _in[0]->subFanIn(level, step, (_inSign[0]=='0'||_inSign[0]=='1'));
-	 if (_inSign[1]) _in[1]->subFanIn(level, step, (_inSign[1]=='0'||_inSign[1]=='1'));
+         _in[0]->subFanIn(level, step, (_inSign[0]=='0'||_inSign[0]=='1'));
+         if (_inSign[1]) _in[1]->subFanIn(level, step, (_inSign[1]=='0'||_inSign[1]=='1'));
       }
    }
 }
@@ -144,23 +144,30 @@ CirGate::reportFanout(int level) const
 {
    assert (level >= 0);
    ++GlobalRef;
-   subFanOut(level, 0, this);
+   subFanOut(level, 0, 0);
 }
 
 void
 CirGate::subFanOut(int level, int step, const CirGate* prev) const
 {
-   int w = (prev == _in[0])? 0:1;
-   bool inv = (_inSign[w] == '0' || _inSign[w] == '1');
+   bool inv;
+   if (prev != 0) {
+      int w = (prev == _in[0])? 0:1;
+      inv = (_inSign[w] == '0' || _inSign[w] == '1');
+   }
+   else inv = false;
    if (level == 0) simplePrint(inv, 0, step);
    else if (isGlobalRef()) simplePrint(inv, 1, step);
    else {
       simplePrint(inv, 0, step);
-      setToGlobalRef();
-      --level; ++step;
-      for (GateList::const_iterator it = _out.begin(); it != _out.end(); ++it) { (*it)->subFanOut(level, step, this); }
+      if (!_out.empty()) {
+         setToGlobalRef();
+         --level; ++step;
+         for (GateList::const_iterator it = _out.begin(); it != _out.end(); ++it) { (*it)->subFanOut(level, step, this); }
+      }
    }
 }
+
 
 void
 CirGate::setIn(CirGate* ingate, int index, char inv)

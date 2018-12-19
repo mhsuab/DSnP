@@ -51,6 +51,7 @@ public:
    int getLineNo() const { return _lineNo; }
    int getId() const { return _gateId; }
    string getName() const { return _name; }
+   
    CirGate* getFanIn(int i) const { return _in[i]; }
 
 
@@ -70,7 +71,8 @@ public:
 
    bool unDef() { return (_type == UNDEF_GATE); }
    bool floating() {
-      if (_in[0]->unDef() || _in[1]->unDef()) return true;
+      if (_type == AIG_GATE) { if (_in[0]->unDef() || _in[1]->unDef()) return true; }
+      else if (_type == PO_GATE) {if (_in[0]->unDef()) return true;}
       return false;
    }
    bool unused() { return (_out.empty()); }
