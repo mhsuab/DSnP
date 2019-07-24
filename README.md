@@ -1,2 +1,2 @@
 # DSnP
-NTU Data Structure & Programming 2018 Fall
+NTU Data Structure and Programming 2018 Fall
